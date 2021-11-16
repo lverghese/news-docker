@@ -6,7 +6,7 @@ type User {
     _id: ID
     username: String
     email: String
-    plan_id: PlanId
+    savedCircuits
 }
 
 type PlanId {
