@@ -20,16 +20,43 @@ const LoginForm = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
     
+ 
     // check if form has everything (as per react-bootstrap docs)
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
-        <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+    try {
+      const { data } = await login({
+        variables: { ...userFormData}
+      });
+
+      if (error) {
+        throw new Error('something went wrong!');
+      }
+
+      
+      console.log(data.user);
+      Auth.login(data.login.token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      username: '',
+      email: '',
+      password: '',
+    });
+  };
+
+   return (
+    <>
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
+          Something is wrong with your login credentials!
         </Alert>
         <Form.Group>
           <Form.Label htmlFor='email'>Email</Form.Label>
@@ -56,15 +83,15 @@ const LoginForm = () => {
           />
           <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
         </Form.Group>
-
-
-
-
-
-
-
-        </>
-        );
-      };
+        <Button
+          disabled={!(userFormData.email && userFormData.password)}
+          type='submit'
+          variant='success'>
+          Submit
+        </Button>
+      </Form>
+    </>
+  );
+};
 
 export default LoginForm;
