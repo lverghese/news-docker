@@ -12,10 +12,7 @@ type User {
 
 type Circuit {
     _id: ID
-<<<<<<< HEAD
-=======
     circuitId: String
->>>>>>> develop
     name: String
     exercises: [exercises]
 }
@@ -23,20 +20,13 @@ type Circuit {
 type Exercise{
     _id: ID!
     name: String
-<<<<<<< HEAD
-    reps: 
-=======
     reps: Int
->>>>>>> develop
     
 }
 type Auth {
     token: ID!
     user: User
 }
-<<<<<<< HEAD
-`;
-=======
 
 savedCircuits{
     circuitId: String
@@ -53,4 +43,3 @@ type Mutation{
 `;
 
 module.exports = typeDefs;
->>>>>>> develop
