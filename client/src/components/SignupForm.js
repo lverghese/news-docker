@@ -60,6 +60,12 @@ return (
           />
           <Form.Control.Feedback type='invalid'>What's the Password?</Form.Control.Feedback>
         </Form.Group>
+        <Button
+          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+          type='submit'
+          variant='success'>
+          Submit
+        </Button>
         </Form>
     </>
   );
