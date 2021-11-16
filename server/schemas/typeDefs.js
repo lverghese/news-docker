@@ -6,15 +6,40 @@ type User {
     _id: ID
     username: String
     email: String
-    plan_id: PlanId
+    password: String
+    savedCircuits: [Circuit]
 }
 
-type PlanId {
+type Circuit {
     _id: ID
-    workouts: [Exercise]
+    circuitId: String
+    name: String
+    exercises: [exercises]
 }
 
 type Exercise{
     _id: ID!
+    name: String
+    reps: Int
     
-}`;
+}
+type Auth {
+    token: ID!
+    user: User
+}
+
+savedCircuits{
+    circuitId: String
+    name: String
+    exercises: [exercises]
+}
+
+type Mutation{
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveCircuit(input: savedCircuit!): User
+    removeCircuit(circuitId: String!): User
+} 
+`;
+
+module.exports = typeDefs;
