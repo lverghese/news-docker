@@ -6,15 +6,24 @@ type User {
     _id: ID
     username: String
     email: String
-    savedCircuits
+    password: String
+    savedCircuits: [Circuit]
 }
 
-type PlanId {
+type Circuit {
     _id: ID
-    workouts: [Exercise]
+    name: String
+    exercises: [exercises]
 }
 
 type Exercise{
     _id: ID!
+    name: String
+    reps: 
     
-}`;
+}
+type Auth {
+    token: ID!
+    user: User
+}
+`;
