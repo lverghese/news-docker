@@ -8,7 +8,7 @@ const resolvers  ={
             if (context.user) {
               const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
-                .populate('books')
+                .populate('articles')
       
               return userData;
             }
@@ -38,7 +38,31 @@ const resolvers  ={
             const token = signToken(user);
             return { token, user };
           },
-//edit plan? => mark workouts as complete/customize them further?
+
+          saveArticle: async(parent, {article}, context) => {
+            //console.log(args.input)
+             if(context.user){
+                 const updatedUser = await User.findOneAndUpdate(
+                     {_id: context.user._id},
+                    
+                     {$addToSet: { savedArticles: article }},
+                     { new: true }
+                 );
+                 return updatedUser;
+             }
+             throw new AuthenticationError('You need to be logged in!');
+           },
+            removeBook:async(parent, args, context) => {
+                 if(context.user){
+                     const updatedUser = await User.findOneAndUpdate(
+                         {_id: context.user._id },
+                         {$pull: {savedArticles: { articlesId: args.ArticleId }}},
+                         {new: true }
+                     );
+                     return updatedUser;
+                 }
+                 throw new AuthenticationError('You need to bbe logged in!');
+            }
 
     }
 };

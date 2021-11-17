@@ -10,47 +10,31 @@ type User {
     savedCircuits: [Circuit]
 }
 
-type Circuit {
+type Article{
     _id: ID
-<<<<<<< HEAD
-=======
-    circuitId: String
->>>>>>> develop
-    name: String
-    exercises: [exercises]
+    author: String
+    title: String
+    description: String
 }
 
-type Exercise{
-    _id: ID!
-    name: String
-<<<<<<< HEAD
-    reps: 
-=======
-    reps: Int
->>>>>>> develop
-    
+type savedArticle{
+    articleId: String
+    author: String
+    title: String
+    description: String
 }
+
 type Auth {
     token: ID!
     user: User
-}
-<<<<<<< HEAD
-`;
-=======
-
-savedCircuits{
-    circuitId: String
-    name: String
-    exercises: [exercises]
 }
 
 type Mutation{
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveCircuit(input: savedCircuit!): User
-    removeCircuit(circuitId: String!): User
+    saveArticle(input: savedArticle!): User
+    removeArticle(articleId: String!): User
 } 
 `;
 
 module.exports = typeDefs;
->>>>>>> develop

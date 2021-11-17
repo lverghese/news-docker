@@ -1,29 +1,27 @@
-//get planId from user object in session
-export const getSavedCircuitId = () => {
-    const savedCircuitId= localStorage.getItem('saved_circuits')
-      ? JSON.parse(localStorage.getItem('saved_circuits'))
+export const getSavedArticleId = () => {
+    const savedArticleId= localStorage.getItem('saved_articles')
+      ? JSON.parse(localStorage.getItem('saved_articles'))
       : [];
-    return savedCircuitId;
+    return savedArticleId;
   };
-  
-  //save exercises via planId from session?
-  export const saveCircuitId = (circuitArr) => {
-    if (circuitArr.length) {
-      localStorage.setItem('saved_circuits', JSON.stringify(circuitArr));
+
+  export const saveArticleId = (articleArr) => {
+    if (articleArr.length) {
+      localStorage.setItem('saved_articles', JSON.stringify(articleArr));
     } else {
-      localStorage.removeItem('saved_circuits');
+      localStorage.removeItem('saved_articles');
     }
   };
 
-  export const removeCircuit = (circuitId) => {
-    const savedCircuits = localStorage.getItem('saved_circuits')
-    ? JSON.parse(localStorage.getItem('saved_circuits'))
+  export const removeArticle = (articleId) => {
+    const savedArticles = localStorage.getItem('saved_articles')
+    ? JSON.parse(localStorage.getItem('saved_articles'))
     :null;
-    if(!savedCircuits){
+    if(!savedArticles){
       return false;
     };
 
-    const updatedSavedCircuits = saveCircuitId?.filter((savedCircuitId) => savedCircuits != circuitId)
-    localStorage.setItem('saved_circuits', JSON.stringify(updatedSavedCircuits));
+    const updatedSavedArticles = saveArticleId?.filter((savedArticleId) => savedArticles != articleId)
+    localStorage.setItem('saved_article', JSON.stringify(updatedSavedArticles));
     return true;
   };
