@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
-const Order = require('./Order');
+const articleSchema = require('./Article');
+
 const userSchema = new Schema({
   username: {
     type: String,
@@ -18,12 +19,9 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  plan_id: {
-      type: Integer,
-      required: true,
-  },
-    //set planid to be an array of exercises
-    savedPlan: [exercises],
+  
+    //set articleid to be an array of articles
+    savedArticle: [articleSchema],
   },
   // do we need to set virts?
   {
@@ -46,10 +44,10 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-//when user is queried their exercises based on their planid comes with it 
-// userSchema.virtual('exercises').get(function () {
-//   return this.savedBooks.length;
-// });
+// when user is queried their exercises based on their articleid comes with it 
+ userSchema.virtual('articles').get(function () {
+   return this.savedArticles.length;
+ });
 
 const User = mongoose.model('User', userSchema);
 
