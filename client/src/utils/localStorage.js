@@ -21,7 +21,7 @@ export const getSavedArticleIds = () => {
       return false;
     };
 
-    const updatedSavedArticles = saveArticleId?.filter((savedArticleId) => savedArticleId != articleId)
-    localStorage.setItem('saved_article', JSON.stringify(updatedSavedArticles));
+    const updatedSavedArticlesIds = saveArticleId?.filter((savedArticleId) => savedArticleId != articleId)
+    localStorage.setItem('saved_article', JSON.stringify(updatedSavedArticlesIds));
     return true;
   };
