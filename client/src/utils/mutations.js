@@ -38,7 +38,7 @@ mutation addUser($username: String!, $password: String!, $email: String!, $artic
               description
               title
               image
-              link
+              url
             }
         }  
     }

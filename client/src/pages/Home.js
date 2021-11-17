@@ -47,8 +47,6 @@ const Home = () => {
     }
 };
 
-
-
     const handleShowArticles = async (event) => {
         //are we keeping the search option? if so this becomes a search btn handler 
         //could be cool to have articles populate the homepage at random for browsing until user searches for one
@@ -79,14 +77,13 @@ const Home = () => {
               }))
           
               //if not search, just display a bunch of fetched articles of a certain type?
-              setDisplayArticles(articleData)
+              setDisplayArticles(articleData);;
             setSearchInput('')
           } catch (err) {
             console.error(err);
           }
     };
 
-   
 
        return (
           <>
@@ -94,7 +91,7 @@ const Home = () => {
             <h1>Select any article to save to your dashboard!</h1>
         </Container>
         <CardColumns>
-            {displayArticles.articles.map((article) => {
+            {displayArticles.map((article) => {
                 return(
                     <Card key = {article.articleId}>
                         <Card.Body>
