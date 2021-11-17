@@ -20,6 +20,7 @@ type Article{
     title: String
     image: String
     description: String
+    url: String
 }
 
 type Auth {
@@ -27,12 +28,13 @@ type Auth {
     user: User
 }
 
-type savedArticle{
+input savedArticle{
     articleId: String
     author: String
     title: String
-    image: String
     description: String
+    image: String
+    url: String
 }
 
 

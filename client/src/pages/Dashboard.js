@@ -12,7 +12,7 @@ import { GET_ME } from '../utils/queries';
 
 const Dashboard = () => {
     const { loading, data } = useQuery(GET_ME);
-    const [removeArticle] = useMutation(REMOVE_ARTICLE);
+    const [removeArticle, { error }] = useMutation(REMOVE_ARTICLE);
 
     //empty set if none saved
     const userData = data?.me || [];

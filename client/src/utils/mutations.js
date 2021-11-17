@@ -28,7 +28,7 @@ mutation addUser($username: String!, $password: String!, $email: String!, $artic
               description
               title
               image
-              link
+              url
             }
         }  
     }
@@ -55,7 +55,7 @@ export const SAVE_ARTICLE = gql`
 
 export const REMOVE_ARTICLE = gql`
     mutation saveArticle($articleId: ID){
-        saveArticle(: $article){
+        saveArticle(article: $article){
             _id
             username
             email

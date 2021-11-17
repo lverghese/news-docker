@@ -8,11 +8,11 @@ import { useMutation } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
 import { SAVE_ARTICLE } from "../utils/mutations";
 import { saveArticleId, getSavedArticleId } from "../utils/localStorage";
-
+import { searchArticles} from '../utils/API';
 const Home = () => {
 //create state to hold articles from api data
     const [displayArticles, setDisplayArticles] =  useState([]);
-
+    const [searchInput, setSearchInput] = useState('');
     const [savedArticleIds, setSavedArticleIds] = useState(getSavedArticleId());
     const [saveArticle] = useMutation(SAVE_ARTICLE);
     // set up useEffect hook to save `savedarticles` 
@@ -24,47 +24,81 @@ const Home = () => {
         return () => saveArticleId(savedArticleIds);
     });
 
-    
-    const articleData = articles.map((article) => ({
-        articleId: article.id,
-        title: article.volumeInfo.title,
-        author: article.author,
-        description: article.description,
-        image: article.image,
-        //should we include link or the whole text?
-      }));
+ //called onclick of save this article btn
+ const handleSaveArticle= async(articleId) => {
+    const articleToSave = displayArticles.find((article) => article.articleId === articleId);
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if(!token){
+        return false;
+    }
 
-    setDisplayArticles(articleData);
+    try {
+        await saveArticle({
+            variables: {article: articleToSave},
+            /**ref booksearch fot  this cache part */
+            update: cache => {
+              const {me} = cache.readQuery({ query: GET_ME });
+             // cache.writeQuery({data: { me: { ...me, savedBooks: [...me.savedBooks, bookToSave]});
+            }
+        });
+        setSavedArticleIds([ ...savedArticleIds, articleToSave.articleId]);
+    } catch(err){
+        console.log(err);
+    }
+};
 
-      const handleSaveArticle= async(articleId) => {
-          const articleToSave = displayArticles.find((article) => article.articleId === articleId);
-          const token = Auth.loggedIn() ? Auth.getToken() : null;
-          if(!token){
-              return false;
+    const handleShowArticles = async (event) => {
+        //are we keeping the search option? if so this becomes a search btn handler 
+        //could be cool to have articles populate the homepage at random for browsing until user searches for one
+        event.preventDefault();
+
+
+        if (!searchInput) {
+            return false;
           }
-
+      
           try {
-              await saveArticle({
-                  variables: {article: articleToSave},
-                  /**ref booksearch fot  this cache part */
-                  update: cache => {
-                    const {me} = cache.readQuery({ query: GET_ME });
-                   // cache.writeQuery({data: { me: { ...me, savedBooks: [...me.savedBooks, bookToSave]});
-                  }
-              }),
-              setSavedArticleIds([ ...savedArticleIds, articleToSave.articleId]);
-          } catch(err){
-              console.log(err);
+              //if search, need to define this function in API
+            const response = await searchArticles(searchInput);
+      
+            if (!response.ok) {
+              throw new Error('something went wrong!');
+            }
+      
+            const { articles } = await response.json();
+    
+            const articleData = articles.map((article) => ({
+                articleId: article._id,
+                authors: article.authors,
+                title: article.title,
+                description: article.description,
+                link: article.infoLink,
+                image: article.image,
+              }))
+          
+              //if not search, just display a bunch of fetched articles of a certain type?
+              setDisplayArticles(articleData);;
+            setSearchInput('')
+          } catch (err) {
+            console.error(err);
           }
-      };
+    };
+    const articleData = articles.map((article) => ({
+        articleId: article._id,
+        authors: article.authors,
+        title: article.title,
+        description: article.description,
+        link: article.infoLink,
+        image: article.image,
+      }))
 
-      return (
+       return (
           <>
         <Container>
-            <h1>Select any article to save to your dashbaord!</h1>
+            <h1>Select any article to save to your dashboard!</h1>
         </Container>
         <CardColumns>
-            {articles.map((article) => {
+            {displayArticles.map((article) => {
                 return(
                     <Card key = {article.articleId}>
                         <Card.Body>
