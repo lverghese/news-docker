@@ -8,7 +8,7 @@ const resolvers  ={
             if (context.user) {
               const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
-                .populate('articles')
+                //.populate('articles')
       
               return userData;
             }
@@ -52,7 +52,7 @@ const resolvers  ={
              }
              throw new AuthenticationError('You need to be logged in!');
            },
-            removeBook:async(parent, args, context) => {
+            removeArticle:async(parent, args, context) => {
                  if(context.user){
                      const updatedUser = await User.findOneAndUpdate(
                          {_id: context.user._id },

@@ -1,11 +1,16 @@
 import React, {useState} from 'react';
-import Auth from '../utils/auth';
-import { useMutation } from 'react';
+import Auth from '../utils/Auth';
+import { Form, Alert, Button} from 'react-bootstrap';
+import  { LOGIN_USER }  from '../utils/mutations';
+import { useMutation } from '@apollo/react-hooks';
+
 //IMPORT LOGIN MUTATION
 const LoginForm = () => {
-    //set initstates to empty
-const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  // const [loginUser] = useMutation(LOGIN_USER);
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [loginUser] = useMutation(LOGIN_USER);
+
   const handleInputChange = (event) => {
       const { name, value } = event.target;
       setUserFormData({ ...userFormData, [name]: value });

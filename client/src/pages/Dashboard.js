@@ -1,9 +1,9 @@
 //auth user dashboard with saved workouts
 import React from 'react';
-import { Container, CardColumns, Card, Button } from 'react-bootstrap';
+import { Container, CardColumns, Card, Button, Jumbotron } from 'react-bootstrap';
 
 //import { getMe, deleteArticle } from '../utils/API';
-import Auth from '../utils/auth';
+import Auth from '../utils/Auth';
 import { removeArticleId } from '../utils/localStorage';
 
 import { useMutation, useQuery } from '@apollo/react-hooks';
@@ -31,10 +31,7 @@ const Dashboard = () => {
         await removeArticle({
           variables: { articleId }
         });
-
-        if (error) {
-          throw new Error('Something went wrong!');
-        }
+        
         // upon success, remove article's id from localStorage
         removeArticleId(articleId);
       } catch (err) {

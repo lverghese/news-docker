@@ -1,58 +1,58 @@
 //dashboard displaying possible workouts to browze  
 //option to select only if logged in
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {  Container, Card, CardColumns } from 'react-bootstrap';
 
-import Auth from '../utils/auth';
+import Auth from '../utils/Auth';
 import { useMutation } from '@apollo/react-hooks';
-import { GET_ME } from '../utils/mutations';
-import { SAVE_CIRCUIT } from "../utils/mutations";
-import { saveCircuitId, getSavedCircuitId } from "../utils/localStorage";
+import { GET_ME } from '../utils/queries';
+import { SAVE_ARTICLE } from "../utils/mutations";
+import { saveArticleId, getSavedArticleId } from "../utils/localStorage";
 
 const Home = () => {
-//create state to hold circuits from api data
-    const [displayCircuits, setDisplayCircuits] =  useState([]);
+//create state to hold articles from api data
+    const [displayArticles, setDisplayArticles] =  useState([]);
 
-    const [savedCircuitIds, setSavedCircuitIds] = useState(getSavedCircuitId());
-    const [saveCircuit] = useMutation(SAVE_CIRCUIT);
-    // set up useEffect hook to save `savedExercises` 
+    const [savedArticleIds, setSavedArticleIds] = useState(getSavedArticleId());
+    const [saveArticle] = useMutation(SAVE_ARTICLE);
+    // set up useEffect hook to save `savedarticles` 
     //list to localStorage on component unmount too keep pwa functionality
 //possible to set unmount to after 2 weeks of no use?
     //method to display api data 
 
     useEffect(() => {
-        return () => saveCircuitId(savedCircuitIds);
+        return () => saveArticleId(savedArticleIds);
     });
-    setDisplayCircuits(circuitData);
-    
-//circuitData to display on homepage
-    // const circuitData = items.map((circuit) => ({
-    //     circuitId: circuit.circuitId,
-    //     name: circuit.name,
-    //     exercises: exercises.map((exercise)=> ({
-    //         name: exercise.name,
-    //         rep: exercise.rep,
-    //     }));
-    //   
-    //   })
 
-      const handleSaveCircuit= async(circuitId) => {
-          const circuitToSave = displayCircuits.find((circuit) => circuit.circuitId === circuitId);
+    
+    const articleData = articles.map((article) => ({
+        articleId: article.id,
+        title: article.volumeInfo.title,
+        author: article.author,
+        description: article.description,
+        image: article.image,
+        //should we include link or the whole text?
+      }));
+
+    setDisplayArticles(articleData);
+
+      const handleSaveArticle= async(articleId) => {
+          const articleToSave = displayArticles.find((article) => article.articleId === articleId);
           const token = Auth.loggedIn() ? Auth.getToken() : null;
           if(!token){
               return false;
           }
 
           try {
-              await saveCircuit({
-                  variables: {circuit: circuitToSave},
+              await saveArticle({
+                  variables: {article: articleToSave},
                   /**ref booksearch fot  this cache part */
                   update: cache => {
                     const {me} = cache.readQuery({ query: GET_ME });
                    // cache.writeQuery({data: { me: { ...me, savedBooks: [...me.savedBooks, bookToSave]});
                   }
               }),
-              setSavedCircuitIds([ ...savedCircuitIds, circuitToSave.circuitId]);
+              setSavedArticleIds([ ...savedArticleIds, articleToSave.articleId]);
           } catch(err){
               console.log(err);
           }
@@ -61,25 +61,20 @@ const Home = () => {
       return (
           <>
         <Container>
-            <h1>Choose from our circuits</h1>
+            <h1>Select any article to save to your dashbaord!</h1>
         </Container>
         <CardColumns>
-            {circuits.map((circuit) => {
+            {articles.map((article) => {
                 return(
-                    <Card key = {circuit.curcuitId}>
+                    <Card key = {article.articleId}>
                         <Card.Body>
-                            <Card.Title>{circuit.name}</Card.Title>
+                            <Card.Title>{article.title}</Card.Title>
                         </Card.Body>
                         <Card.Text>
-                            {circuit.exercises.map((exercise) => {
-                                return(
-                                    <p>{exercise.name} x {exercise.reps}</p>
-                                );
-                               
-                            })}
+                                {article.description}
                         </Card.Text>
                     </Card>
-                )
+                );
             })}
         </CardColumns>
         </>
@@ -88,13 +83,3 @@ const Home = () => {
 
 export default Home;
 
-/** 
- * use with auth to only show save button when logged in
- * <Button
-                                disabled={savedCircuitIds?.some((savedCircuitId) => savedCircuitId === circuit.circuitId)}
-                                className='btn-block btn-info'
-                                onClick={() => handleSaveCircuit(circuit.circuitId)}>
-                                {savedCircuitIds?.some((savedCircuitId) => savedBookId === book.bookId)
-                                  ? 'This book has already been saved!'
-                                  : 'Save this Book!'}
-                              </Button> */

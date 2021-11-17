@@ -1,19 +1,24 @@
 const { gql } = require('apollo-server-express');
 
-//plan_id?
 const typeDefs = gql`
+type Query {
+    me: User
+}
+
 type User {
     _id: ID
     username: String
     email: String
     password: String
-    savedCircuits: [Circuit]
+    articleCount: Int
+    savedArticles: [Article]
 }
 
 type Article{
     _id: ID
     author: String
     title: String
+    image: String
     description: String
 }
 
@@ -26,6 +31,7 @@ type savedArticle{
     articleId: String
     author: String
     title: String
+    image: String
     description: String
 }
 
