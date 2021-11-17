@@ -4,25 +4,23 @@ import { Container, CardColumns, Card, Button } from 'react-bootstrap';
 
 //import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import { removeArticle } from '../utils/localStorage';
 
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { REMOVE_CIRCUIT } from '../utils/mutations';
+import { REMOVE_ARTICLE } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 
 const Dashboard = () => {
     const { loading, data } = useQuery(GET_ME);
-    const [removeCircuit] = useMutation(REMOVE_CIRCUIT);
+    const [removeArticle] = useMutation(REMOVE_ARTICLE);
 
     //empty set if none saved
     const userData = data?.me || [];
 
-    //handler for marking circuit as complete
-    const handleCompleteCircuit = async (circuitId) => {
+  
 
-    };
     //handler for removing circuit from dashboard still incomplete
-    const handleDeleteCircuit = async (circuitId) => {
+    const handleDeleteArticle = async (articleId) => {
 
     }
 
@@ -34,26 +32,34 @@ const Dashboard = () => {
         <>
           <Jumbotron fluid className='text-light bg-dark'>
             <Container>
-              <h1>Your Saved Circuits</h1>
+              <h1>Your Saved Articles</h1>
             </Container>
           </Jumbotron>
           <Container>
             <h2>
-              {userData.savedCircuits.length
-                ? `You have ${userData.savedCircuits.length} saved ${userData.savedCircuitss.length === 1 ? 'circuits' : 'circuit'}: left to complete!`
-                : 'You have no saved circuits yet'}
+              {userData.savedArticle.length
+                ? `You have ${userData.savedArticle.length} saved ${userData.savedArticles.length === 1 ? 'articles' : 'articles'}: left to complete!`
+                : 'You have no saved articles yet'}
             </h2>
             <CardColumns>
-              {userData.savedCircuits.map((circuit) => {
+              {userData.savedArticles.map((article) => {
                 return (
-                    <Card key = {circuit.curcuitId}>
+                    <Card key = {article.articleId}>
+                       {article.image ? <Card.Img src={article.image} alt={`The cover for ${article.title}`} variant='top' /> : null}
                     <Card.Body>
-                        <Card.Title>{circuit.name}</Card.Title>
+                        <Card.Title>{article.name}</Card.Title>
                     </Card.Body>
                     <Card.Text>
-                        {circuit.exercises.map((exercise) => {
+                        {article.map((article) => {
                             return(
-                                <p>{exercise.name} x {exercise.reps}</p>
+                              <div>
+                                <p>{article.title} </p>
+                                <p>{article.author} </p>
+                                <p>{article.description} </p>
+                                <p>{article.title} </p>
+
+                              </div>
+                                
                             );
                            
                         })}
