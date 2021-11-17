@@ -91,7 +91,7 @@ const Home = () => {
        return (
           <>
         <Container>
-            <h1>Select any article to save to your dashbaord!</h1>
+            <h1>Select any article to save to your dashboard!</h1>
         </Container>
         <CardColumns>
             {displayArticles.articles.map((article) => {
