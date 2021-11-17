@@ -65,7 +65,7 @@ export const SAVE_ARTICLE = gql`
 
 export const REMOVE_ARTICLE = gql`
     mutation saveArticle($articleId: ID){
-        saveArticle(: $article){
+        saveArticle(article: $article){
             _id
             username
             email
