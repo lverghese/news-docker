@@ -1,4 +1,4 @@
-export const getSavedArticleIds = () => {
+export const getSavedArticleId = () => {
     const savedArticleIds= localStorage.getItem('saved_articles')
       ? JSON.parse(localStorage.getItem('saved_articles'))
       : [];

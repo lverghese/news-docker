@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
-import Auth from '../utils/auth';
+import Auth from '../utils/Auth';
+import { Form, Alert, Button} from 'react-bootstrap';
 import { useMutation } from 'react';
+import { LOGIN_USER } from '../utils/mutations';
+
 //IMPORT LOGIN MUTATION
 const LoginForm = () => {
+  const [showAlert, setShowAlert] = useState(false);
+  const [loginUser] = useMutation(LOGIN_USER);
     //set initstates to empty
 const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   // const [loginUser] = useMutation(LOGIN_USER);

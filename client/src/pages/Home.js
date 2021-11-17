@@ -3,7 +3,7 @@
 import React, { useEffect } from "react";
 import {  Container, Card, CardColumns } from 'react-bootstrap';
 
-import Auth from '../utils/auth';
+import Auth from '../utils/Auth';
 import { useMutation } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
 import { SAVE_ARTICLE } from "../utils/mutations";

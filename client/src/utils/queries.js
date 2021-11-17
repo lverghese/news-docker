@@ -7,6 +7,7 @@ export const GET_ME = gql`
         username
         email
         password
+        articleCount
         savedArticles{
             articleId
             author

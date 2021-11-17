@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import {gql}from 'graphql-tag';
 
 //witholding all !required
 export const lOGIN_USER = gql`
