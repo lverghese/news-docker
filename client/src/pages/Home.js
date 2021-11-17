@@ -12,7 +12,7 @@ import { saveArticleId, getSavedArticleId } from "../utils/localStorage";
 const Home = () => {
 //create state to hold articles from api data
     const [displayArticles, setDisplayArticles] =  useState([]);
-
+    const [searchInput, setSearchInput] = useState('');
     const [savedArticleIds, setSavedArticleIds] = useState(getSavedArticleId());
     const [saveArticle] = useMutation(SAVE_ARTICLE);
     // set up useEffect hook to save `savedarticles` 
@@ -23,8 +23,45 @@ const Home = () => {
     useEffect(() => {
         return () => saveArticleId(savedArticleIds);
     });
-    setDisplayArticles(articleData);
 
+    const handleShowArticles = async (event) => {
+        //are we keeping the search option? if so this becomes a search btn handler 
+        //could be cool to have articles populate the homepage at random for browsing until user searches for one
+        event.preventDefault();
+
+
+        if (!searchInput) {
+            return false;
+          }
+      
+          try {
+              //if search, need to define this function in API
+            const response = await searchArticles(searchInput);
+      
+            if (!response.ok) {
+              throw new Error('something went wrong!');
+            }
+      
+            const { articles } = await response.json();
+    
+            const articleData = articles.map((article) => ({
+                articleId: article._id,
+                authors: article.authors,
+                title: article.title,
+                description: article.description,
+                link: article.infoLink,
+                image: article.image,
+              }));
+          
+              //if not search, just display a bunch of fetched articles of a certain type?
+              setDisplayArticles(articleData);
+            setSearchInput('');
+          } catch (err) {
+            console.error(err);
+          }
+    };
+
+    //called onclick of save this article btn
       const handleSaveArticle= async(articleId) => {
           const articleToSave = displayArticles.find((article) => article.articleId === articleId);
           const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -53,7 +90,7 @@ const Home = () => {
             <h1>Select any article to save to your dashbaord!</h1>
         </Container>
         <CardColumns>
-            {articles.map((article) => {
+            {articleData.articles.map((article) => {
                 return(
                     <Card key = {article.articleId}>
                         <Card.Body>
