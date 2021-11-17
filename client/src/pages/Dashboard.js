@@ -7,7 +7,7 @@ import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { REMOVE_CIRCUIT } from '../utils/mutations';
+import { REMOVE_ARTICLE } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 
 const Dashboard = () => {
@@ -67,4 +67,4 @@ const Dashboard = () => {
       );
 };
 
-export const Dashboard;
+export default Dashboard;

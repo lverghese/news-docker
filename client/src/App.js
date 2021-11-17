@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 
-import Dashboard from './pages/SearchBooks';
-import Home from './pages/SavedBooks';
+import Dashboard from './pages/Dashboard';
+import Home from './pages/Home';
 import Navbar from './components/Navbar';
 
 //cleint side set with jwt headers
