@@ -2,29 +2,45 @@
 import React from 'react';
 import { Container, CardColumns, Card, Button } from 'react-bootstrap';
 
-//import { getMe, deleteBook } from '../utils/API';
+//import { getMe, deleteArticle } from '../utils/API';
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import { removeArticleId } from '../utils/localStorage';
 
 import { useMutation, useQuery } from '@apollo/react-hooks';
-import { REMOVE_CIRCUIT } from '../utils/mutations';
+import { REMOVE_ARTICLE } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 
 const Dashboard = () => {
     const { loading, data } = useQuery(GET_ME);
-    const [removeCircuit] = useMutation(REMOVE_CIRCUIT);
+    const [removeArticle] = useMutation(REMOVE_ARTICLE);
 
     //empty set if none saved
     const userData = data?.me || [];
 
-    //handler for marking circuit as complete
-    const handleCompleteCircuit = async (circuitId) => {
+  
 
+      // create function that accepts the book's mongo _id value as param and deletes the book from the database
+    const handleDeleteArticle = async (articleId) => {
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+      if (!token) {
+        return false;
+      }
+
+      try {
+        await removeArticle({
+          variables: { articleId }
+        });
+
+        if (error) {
+          throw new Error('Something went wrong!');
+        }
+        // upon success, remove article's id from localStorage
+        removeArticleId(articleId);
+      } catch (err) {
+        console.error(err);
+      }
     };
-    //handler for removing circuit from dashboard still incomplete
-    const handleDeleteCircuit = async (circuitId) => {
-
-    }
 
     if (loading) {
         return <h2>LOADING...</h2>;
@@ -34,30 +50,28 @@ const Dashboard = () => {
         <>
           <Jumbotron fluid className='text-light bg-dark'>
             <Container>
-              <h1>Your Saved Circuits</h1>
+              <h1>Your Saved Articles</h1>
             </Container>
           </Jumbotron>
           <Container>
             <h2>
-              {userData.savedCircuits.length
-                ? `You have ${userData.savedCircuits.length} saved ${userData.savedCircuitss.length === 1 ? 'circuits' : 'circuit'}: left to complete!`
-                : 'You have no saved circuits yet'}
+              {userData.savedArticle.length
+                ? `You have ${userData.savedArticle.length} saved ${userData.savedArticles.length === 1 ? 'articles' : 'articles'}: left to complete!`
+                : 'You have no saved articles yet'}
             </h2>
             <CardColumns>
-              {userData.savedCircuits.map((circuit) => {
+              {userData.savedArticles.map((article) => {
                 return (
-                    <Card key = {circuit.curcuitId}>
+                    <Card key = {article.articleId}>
+                       {article.image ? <Card.Img src={article.image} alt={`The cover for ${article.title}`} variant='top' /> : null}
                     <Card.Body>
-                        <Card.Title>{circuit.name}</Card.Title>
+                        <Card.Title>{article.title}</Card.Title>
+                        <p className='small'>Authors: {article.author}</p>
+                        <Card.Text>{article.description}</Card.Text>
+                        <Button className='btn-block btn-danger' onClick={() => handleDeleteArticle(article.articleId)}>
+                          Delete this Article!
+                        </Button>
                     </Card.Body>
-                    <Card.Text>
-                        {circuit.exercises.map((exercise) => {
-                            return(
-                                <p>{exercise.name} x {exercise.reps}</p>
-                            );
-                           
-                        })}
-                    </Card.Text>
                 </Card>
                 );
               })}
@@ -67,4 +81,4 @@ const Dashboard = () => {
       );
 };
 
-export const Dashboard;
+export default Dashboard;
