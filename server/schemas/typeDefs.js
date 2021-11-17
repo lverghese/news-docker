@@ -17,6 +17,11 @@ type Article{
     description: String
 }
 
+type Auth {
+    token: ID!
+    user: User
+}
+
 type savedArticle{
     articleId: String
     author: String
@@ -24,10 +29,6 @@ type savedArticle{
     description: String
 }
 
-type Auth {
-    token: ID!
-    user: User
-}
 
 type Mutation{
     login(email: String!, password: String!): Auth
