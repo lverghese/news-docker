@@ -58,7 +58,6 @@ module.exports = {
       return res.status(400).json(err);
     }
   },
-  // remove a book from `savedBooks`
   async deleteArticle({ user, params }, res) {
     const updatedUser = await User.findOneAndUpdate(
       { _id: user._id },

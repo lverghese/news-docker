@@ -31,10 +31,7 @@ const Dashboard = () => {
         await removeArticle({
           variables: { articleId }
         });
-
-        if (error) {
-          throw new Error('Something went wrong!');
-        }
+        
         // upon success, remove article's id from localStorage
         removeArticleId(articleId);
       } catch (err) {

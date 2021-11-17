@@ -10,17 +10,7 @@ mutation login($email: String!, $password: String!){
           }
     }
 }`;
-/**        username
-            email
-            articleCount
-            savedArticles {
-              articleId
-              author
-              description
-              title
-              image
-              link
-            } */
+
 
 
 export const ADD_USER = gql`
@@ -80,4 +70,16 @@ export const REMOVE_ARTICLE = gql`
         }
     }
 `;
+
+/**        username
+            email
+            articleCount
+            savedArticles {
+              articleId
+              author
+              description
+              title
+              image
+              link
+            } */
 

@@ -1,6 +1,6 @@
 //dashboard displaying possible workouts to browze  
 //option to select only if logged in
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {  Container, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/Auth';
@@ -23,6 +23,17 @@ const Home = () => {
     useEffect(() => {
         return () => saveArticleId(savedArticleIds);
     });
+
+    
+    const articleData = articles.map((article) => ({
+        articleId: article.id,
+        title: article.volumeInfo.title,
+        author: article.author,
+        description: article.description,
+        image: article.image,
+        //should we include link or the whole text?
+      }));
+
     setDisplayArticles(articleData);
 
       const handleSaveArticle= async(articleId) => {

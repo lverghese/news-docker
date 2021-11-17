@@ -42,7 +42,7 @@ export const saveArticle = (articleData, token) => {
   };
 
   //remove saved article from user's dashboard
-export const deleteBook = (articleId, token) => {
+export const deleteArticle= (articleId, token) => {
     return fetch(`/api/users/articles/${articleId}`, {
       method: 'DELETE',
       headers: {

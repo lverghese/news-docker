@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
 import Auth from '../utils/Auth';
 import { Form, Alert, Button} from 'react-bootstrap';
-import { LOGIN_USER } from '../utils/mutations';
-
+import  { LOGIN_USER }  from '../utils/mutations';
 import { useMutation } from '@apollo/react-hooks';
 
 //IMPORT LOGIN MUTATION
