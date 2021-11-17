@@ -7,15 +7,13 @@ export const GET_ME = gql`
         username
         email
         password
-        savedCircuits {
-            _id
-            circuitId
-            name
-            exercises{
-                _id
-                name
-                reps
-            }
+        savedArticles{
+            articleId
+            author
+            title
+            description
+            image
+            url
         }
     }
 }
