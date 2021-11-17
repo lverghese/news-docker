@@ -2,9 +2,9 @@
 import React from 'react';
 import { Container, CardColumns, Card, Button } from 'react-bootstrap';
 
-//import { getMe, deleteBook } from '../utils/API';
+//import { getMe, deleteArticle } from '../utils/API';
 import Auth from '../utils/auth';
-import { removeArticle } from '../utils/localStorage';
+import { removeArticleId } from '../utils/localStorage';
 
 import { useMutation, useQuery } from '@apollo/react-hooks';
 import { REMOVE_ARTICLE } from '../utils/mutations';
@@ -19,10 +19,28 @@ const Dashboard = () => {
 
   
 
-    //handler for removing circuit from dashboard still incomplete
+      // create function that accepts the book's mongo _id value as param and deletes the book from the database
     const handleDeleteArticle = async (articleId) => {
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    }
+      if (!token) {
+        return false;
+      }
+
+      try {
+        await removeArticle({
+          variables: { articleId }
+        });
+
+        if (error) {
+          throw new Error('Something went wrong!');
+        }
+        // upon success, remove article's id from localStorage
+        removeArticleId(articleId);
+      } catch (err) {
+        console.error(err);
+      }
+    };
 
     if (loading) {
         return <h2>LOADING...</h2>;
@@ -50,11 +68,10 @@ const Dashboard = () => {
                         <Card.Title>{article.title}</Card.Title>
                         <p className='small'>Authors: {article.author}</p>
                         <Card.Text>{article.description}</Card.Text>
-                        <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
+                        <Button className='btn-block btn-danger' onClick={() => handleDeleteArticle(article.articleId)}>
                           Delete this Article!
                         </Button>
                     </Card.Body>
-                    
                 </Card>
                 );
               })}
@@ -64,4 +81,4 @@ const Dashboard = () => {
       );
 };
 
-export const Dashboard;
+export default Dashboard;

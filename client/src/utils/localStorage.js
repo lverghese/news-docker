@@ -1,27 +1,27 @@
-export const getSavedArticleId = () => {
-    const savedArticleId= localStorage.getItem('saved_articles')
+export const getSavedArticleIds = () => {
+    const savedArticleIds= localStorage.getItem('saved_articles')
       ? JSON.parse(localStorage.getItem('saved_articles'))
       : [];
-    return savedArticleId;
+    return savedArticleIds;
   };
 
-  export const saveArticleId = (articleArr) => {
-    if (articleArr.length) {
-      localStorage.setItem('saved_articles', JSON.stringify(articleArr));
+  export const saveArticleId = (articleIdArr) => {
+    if (articleIdArr.length) {
+      localStorage.setItem('saved_articles', JSON.stringify(articleIdArr));
     } else {
       localStorage.removeItem('saved_articles');
     }
   };
 
-  export const removeArticle = (articleId) => {
-    const savedArticles = localStorage.getItem('saved_articles')
+  export const removeArticleId = (articleId) => {
+    const savedArticlesIds = localStorage.getItem('saved_articles')
     ? JSON.parse(localStorage.getItem('saved_articles'))
     :null;
-    if(!savedArticles){
+    if(!savedArticlesIds){
       return false;
     };
 
-    const updatedSavedArticles = saveArticleId?.filter((savedArticleId) => savedArticles != articleId)
+    const updatedSavedArticles = saveArticleId?.filter((savedArticleId) => savedArticleId != articleId)
     localStorage.setItem('saved_article', JSON.stringify(updatedSavedArticles));
     return true;
   };
