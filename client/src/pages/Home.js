@@ -1,6 +1,6 @@
 //dashboard displaying possible workouts to browze  
 //option to select only if logged in
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {  Container, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/Auth';
