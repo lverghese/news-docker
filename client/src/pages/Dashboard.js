@@ -47,23 +47,14 @@ const Dashboard = () => {
                     <Card key = {article.articleId}>
                        {article.image ? <Card.Img src={article.image} alt={`The cover for ${article.title}`} variant='top' /> : null}
                     <Card.Body>
-                        <Card.Title>{article.name}</Card.Title>
+                        <Card.Title>{article.title}</Card.Title>
+                        <p className='small'>Authors: {article.author}</p>
+                        <Card.Text>{article.description}</Card.Text>
+                        <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
+                          Delete this Article!
+                        </Button>
                     </Card.Body>
-                    <Card.Text>
-                        {article.map((article) => {
-                            return(
-                              <div>
-                                <p>{article.title} </p>
-                                <p>{article.author} </p>
-                                <p>{article.description} </p>
-                                <p>{article.title} </p>
-
-                              </div>
-                                
-                            );
-                           
-                        })}
-                    </Card.Text>
+                    
                 </Card>
                 );
               })}
