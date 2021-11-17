@@ -13,14 +13,18 @@ const navApp = () => {
         <Navbar bg='light' variant='dark' expand='lg'>
             <Container fluid>
                 <Navbar.Brand as={Link} to="/">
-                    Fitness Buddy
+                    (Name of Article Here)
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls='navbar'/>
-                <Nav className="auto">
+                <Navbar.Collapse id='navbar'>
+                <Nav className="ml-auto">
+                <Nav.Link as={Link} to='/'>
+                Search For Articles
+              </Nav.Link>
                 {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
-                    See Your Workouts
+                    See Your Saved Articles
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
@@ -28,7 +32,7 @@ const navApp = () => {
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
               )}
               </Nav>
-
+                </Navbar.Collapse>
             </Container>
 
         </Navbar>
