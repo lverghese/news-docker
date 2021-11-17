@@ -11,7 +11,7 @@ type User {
     username: String
     email: String
     password: String
-    articleCount
+    articleCount: Int
     savedArticles: [Article]
 }
 

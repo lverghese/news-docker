@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
 import Auth from '../utils/Auth';
 import { Form, Alert, Button} from 'react-bootstrap';
-import { useMutation } from 'react';
 import { LOGIN_USER } from '../utils/mutations';
+
+import { useMutation } from 'react';
 
 //IMPORT LOGIN MUTATION
 const LoginForm = () => {
+  const [userFormData, setUserFormData] = useState({ email: '', password: '' });
+  const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [loginUser] = useMutation(LOGIN_USER);
-    //set initstates to empty
-const [userFormData, setUserFormData] = useState({ email: '', password: '' });
-  // const [loginUser] = useMutation(LOGIN_USER);
+  
   const handleInputChange = (event) => {
       const { name, value } = event.target;
       setUserFormData({ ...userFormData, [name]: value });
