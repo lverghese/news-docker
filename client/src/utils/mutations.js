@@ -1,4 +1,4 @@
-import {gql}from 'graphql-tag';
+import gql from 'graphql-tag';
 
 //witholding all !required
 export const lOGIN_USER = gql`
@@ -21,7 +21,6 @@ mutation loginUser($email: String!, $password: String!){
           }
     }
 }`;
-//username
 
 export const ADD_USER = gql`
 mutation addUser($username: String!, $password: String!, $email: String!, $articleId: ArticleId){
