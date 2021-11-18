@@ -1,6 +1,8 @@
 //auth user dashboard with saved workouts
 import React from 'react';
 import { Container, CardColumns, Card, Button, Jumbotron } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 //import { getMe, deleteArticle } from '../utils/API';
 import Auth from '../utils/Auth';
@@ -47,7 +49,7 @@ const Dashboard = () => {
         <>
           <Jumbotron fluid className='text-light bg-dark'>
             <Container>
-              <h1>Your Saved Articles</h1>
+              <h1 class="display-4">Your Saved Articles</h1>
             </Container>
           </Jumbotron>
           <Container>
@@ -59,12 +61,13 @@ const Dashboard = () => {
             <CardColumns>
               {userData.savedArticles.map((article) => {
                 return (
-                    <Card key = {article.articleId}>
+                    <Card key = {article.articleId} style={{ width: '40rem' }}>
                        {article.image ? <Card.Img src={article.image} alt={`The cover for ${article.title}`} variant='top' /> : null}
                     <Card.Body>
                         <Card.Title>{article.title}</Card.Title>
-                        <p className='small'>Authors: {article.author}</p>
+                        <Card.Subtitle className='mb-2 text-muted'> Authors: {article.author}</Card.Subtitle>
                         <Card.Text>{article.description}</Card.Text>
+                        <Card.Link href={article.url}>{article.url}</Card.Link>
                         <Button className='btn-block btn-danger' onClick={() => handleDeleteArticle(article.articleId)}>
                           Delete this Article!
                         </Button>
