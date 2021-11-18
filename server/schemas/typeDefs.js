@@ -29,7 +29,7 @@ type Auth {
     user: User
 }
 
-type savedArticle{
+input articleInput{
     articleId: ID
     author: String
     title: String
@@ -41,9 +41,10 @@ type savedArticle{
 type Mutation{
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveArticle(Article: savedArticle!): User
+    saveArticle(input: articleInput!): User
     removeArticle(articleId: String!): User
 } 
 `;
 //  https://egghead.io/lessons/apollo-wrap-graphql-mutation-arguments-with-a-graphql-input-type
 module.exports = typeDefs;
+ // articleId: ID

@@ -17,7 +17,7 @@ mutation addUser($username: String!, $password: String!, $email: String!){
     addUser(username: $username, password: $password, email: $email){
         token
         user {
-            _id
+            articleId
             username
             email
             articleCount
@@ -35,21 +35,16 @@ mutation addUser($username: String!, $password: String!, $email: String!){
 `;
 
 export const SAVE_ARTICLE = gql`
-mutation saveArticle($savedArticle: savedArticle!){
-    saveArticle(savedArticle: $savedArticle){
-        _id
-        username
-        email
-        articleCount
-           savedArticles{
-            articleId
+mutation saveArticle($input: articleInput!){
+    saveArticle(input: $input){
+        articleId
             author
             title
             description
             urlToImage
             url
+        
         }
-    }
 }
 `;
 
