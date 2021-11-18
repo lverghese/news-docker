@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FlatList } from "react-native";
 
-export default class Example extends Component {
+export default class NewsFeed extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +27,7 @@ export default class Example extends Component {
   renderItem(item) {
     return (
       <React.Fragment>
-        {item.isVideo ? showVideo() : showParagraph()}
+        {item.isVideo ? showVideo() : this.showArticle()}
       </React.Fragment>
     );
   }
@@ -51,3 +51,63 @@ export default class Example extends Component {
 }
 
 export default NewsFeed;
+
+
+
+/* import React from 'react';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+
+const DATA = [
+  {
+    id: 'Yeet',
+    title: 'First Item',
+  },
+  {
+    id: 'Yeet2',
+    title: 'Second Item',
+  },
+  {
+    id: 'Yeet3',
+    title: 'Third Item',
+  },
+];
+
+const Item = ({ title }) => (
+  <View style={styles.item}>
+    <Text style={styles.title}>{title}</Text>
+  </View>
+);
+
+const App = () => {
+  const renderItem = ({ item }) => (
+    <Item title={item.title} />
+  );
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={DATA}
+        renderItem={renderItem}
+        keyExtractor={item => item.id}
+      />
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: StatusBar.currentHeight || 0,
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    marginHorizontal: 16,
+  },
+  title: {
+    fontSize: 32,
+  },
+});
+
+export default App; */
