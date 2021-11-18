@@ -38,7 +38,7 @@ export const saveArticle = (articleData, token) => {
       body: JSON.stringify(articleData),
      
     });
-    console.log(articleData);
+    //console.log(articleData);
   };
 
   //remove saved article from user's dashboard

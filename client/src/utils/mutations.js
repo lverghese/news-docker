@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 
 //witholding all !required
 export const LOGIN_USER = gql`
+
 mutation login($email: String!, $password: String!){
     login(email: $email, password: $password){
         token
@@ -9,10 +10,9 @@ mutation login($email: String!, $password: String!){
             _id
           }
     }
-}`;
-
-//, $articleId: articleId
-
+}
+`
+;
 
 export const ADD_USER = gql`
 mutation addUser($username: String!, $password: String!, $email: String!){
@@ -27,67 +27,50 @@ mutation addUser($username: String!, $password: String!, $email: String!){
                 author
                 description
                 title
-                image
+                urlToImage
                 url
               }
         }  
     }
-}`;
-/**      savedArticles {
-              articleId
-              author
-              description
-              title
-              image
-              url
-            } */
+}
+`;
 
 export const SAVE_ARTICLE = gql`
-    mutation saveArticle($article: savedArticle){
-        saveArticle(input: $article){
+    mutation saveArticle($article: articleId!){
+        saveArticle(articleId: $input){
             _id
             username
             email
             articleCount
-            savedArticles{
+      
+        }
+    }
+`;
+/**                savedArticles{
                 articleId
                 author
                 title
                 description
-                image
+                urlToImage
                 url
-            }
-        }
-    }
-`;
-
+            }*/
 export const REMOVE_ARTICLE = gql`
-    mutation saveArticle($articleId: ID){
-        removeArticle(article: $article){
+    mutation removeArticle($articleId: ID){
+        removeArticle(Article: $article){
             _id
             username
             email
+            articleCount
             savedArticles{
                 articleId
                 author
                 title
                 description
-                image
+                urlToImage
                 url
             }
         }
     }
 `;
 
-/**        username
-            email
-            articleCount
-            savedArticles {
-              articleId
-              author
-              description
-              title
-              image
-              link
-            } */
 

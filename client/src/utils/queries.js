@@ -13,7 +13,7 @@ export const GET_ME = gql`
             author
             title
             description
-            image
+            urlToImage
             url
         }
     }

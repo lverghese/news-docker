@@ -52,6 +52,7 @@ const resolvers = {
              }
              throw new AuthenticationError('You need to be logged in!');
            },
+           
             removeArticle:async(parent, args, context) => {
                  if(context.user){
                      const updatedUser = await User.findOneAndUpdate(
