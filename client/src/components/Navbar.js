@@ -22,7 +22,7 @@ const AppNavbar = () => {
             <Navbar.Collapse id='navbar'>
               <Nav className='ml-auto'>
                 <Nav.Link as={Link} to='/'>
-                  Search For Artciles
+                  Search For Articles
                 </Nav.Link>
                 {/* if user is logged in show saved books and logout */}
                 {Auth.loggedIn() ? (
