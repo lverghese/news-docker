@@ -3,6 +3,7 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 type Query {
     me: User
+    users: [User]
 }
 
 type User {
@@ -29,7 +30,7 @@ type Auth {
     user: User
 }
 
-input savedArticle{
+type savedArticle{
     articleId: ID
     author: String
     title: String
@@ -41,8 +42,8 @@ input savedArticle{
 type Mutation{
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveArticle(input: savedArticle!): User
-    removeArticle(articleId: String!): User
+    saveArticle(articleId: ID): User
+    removeArticle(articleId: ID!): User
 } 
 `;
 //  https://egghead.io/lessons/apollo-wrap-graphql-mutation-arguments-with-a-graphql-input-type

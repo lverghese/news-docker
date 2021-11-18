@@ -8,13 +8,18 @@ const resolvers = {
             if (context.user) {
               const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
-                //.populate('articles')
+                .populate('savedArticles')
       
               return userData;
             }
       
             throw new AuthenticationError('Not logged in');
           },
+          users: async () => {
+            return User.find()
+              .select('-__v -password')
+              .populate('savedArticles');
+          }
     },
     Mutation: {
         addUser: async (parents, args ) => {
@@ -39,15 +44,16 @@ const resolvers = {
             return { token, user };
           },
 
-          saveArticle: async(parent, {input}, context) => {
+          saveArticle: async(parent, {articleId}, context) => {
             //console.log(args.input)
+            //if user is session
              if(context.user){
                  const updatedUser = await User.findOneAndUpdate(
                      {_id: context.user._id},
                     
-                     {$addToSet: { savedArticles: article }},
+                     {$addToSet: { savedArticles: articleId }},
                      { new: true }
-                 );
+                 ).populate('savedArticles');
                  return updatedUser;
              }
              throw new AuthenticationError('You need to be logged in!');

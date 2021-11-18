@@ -12,6 +12,7 @@ import { searchArticles} from '../utils/API';
 const Home = () => {
 //create state to hold articles from api data
     const [displayArticles, setDisplayArticles] =  useState([]);
+    //search initially empty
     const [searchInput, setSearchInput] = useState('');
     const [savedArticleIds, setSavedArticleIds] = useState(getSavedArticleId());
     const [saveArticle] = useMutation(SAVE_ARTICLE);
@@ -58,7 +59,7 @@ const Home = () => {
           }
       
           try {
-              //if search, need to define this function in API
+              //response == api fetch + query
             const response = await searchArticles(searchInput);
       
             if (!response.ok) {

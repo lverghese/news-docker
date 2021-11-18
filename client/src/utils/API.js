@@ -23,7 +23,7 @@ export const getMe = (token) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(userData),
+      body: JSON.stringify(userData)
     });
   };
   
@@ -36,8 +36,7 @@ export const saveArticle = (articleData, token) => {
          authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(articleData),
-     
-    });
+     });
     //console.log(articleData);
   };
 
