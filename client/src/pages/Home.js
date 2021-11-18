@@ -83,14 +83,6 @@ const Home = () => {
             console.error(err);
           }
     };
-    const articleData = articles.map((article) => ({
-        articleId: article._id,
-        authors: article.authors,
-        title: article.title,
-        description: article.description,
-        link: article.infoLink,
-        image: article.image,
-      }))
 
        return (
           <>
