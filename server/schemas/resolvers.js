@@ -2,7 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
-const resolvers  ={
+const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
@@ -61,7 +61,7 @@ const resolvers  ={
                      );
                      return updatedUser;
                  }
-                 throw new AuthenticationError('You need to bbe logged in!');
+                 throw new AuthenticationError('You need to be logged in!');
             }
 
     }

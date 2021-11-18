@@ -11,11 +11,12 @@ mutation login($email: String!, $password: String!){
     }
 }`;
 
+//, $articleId: articleId
 
 
 export const ADD_USER = gql`
-mutation addUser($username: String!, $password: String!, $email: String!, $articleId: ArticleId){
-    addUser(username: $username, password: $password, email: $email, articleId: $articleId ){
+mutation addUser($username: String!, $password: String!, $email: String!){
+    addUser(username: $username, password: $password, email: $email){
         token
         user {
             _id
@@ -23,16 +24,23 @@ mutation addUser($username: String!, $password: String!, $email: String!, $artic
             email
             articleCount
             savedArticles {
+                author
+                description
+                title
+                image
+                url
+              }
+        }  
+    }
+}`;
+/**      savedArticles {
               articleId
               author
               description
               title
               image
               url
-            }
-        }  
-    }
-}`;
+            } */
 
 export const SAVE_ARTICLE = gql`
     mutation saveArticle($article: savedArticle){
@@ -55,7 +63,7 @@ export const SAVE_ARTICLE = gql`
 
 export const REMOVE_ARTICLE = gql`
     mutation saveArticle($articleId: ID){
-        saveArticle(article: $article){
+        removeArticle(article: $article){
             _id
             username
             email
