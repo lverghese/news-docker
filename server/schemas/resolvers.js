@@ -55,7 +55,7 @@ const resolvers = {
             //if user is session
              if(user){
                  const updatedUser = await User.findByIdAndUpdate(
-                     {_id: context.user._id},     
+                     {_id: user._id},     
                      {$addToSet: { savedArticles:  author,
                       title,
                       description,
