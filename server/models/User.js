@@ -21,7 +21,7 @@ const userSchema = new Schema({
   },
   
     //set articleid to be an array of articles
-    savedArticle: [articleSchema],
+    savedArticles: [articleSchema],
   },
   // do we need to set virts?
   {

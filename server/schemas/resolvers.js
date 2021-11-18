@@ -44,16 +44,16 @@ const resolvers = {
             return { token, user };
           },
 
-          saveArticle: async(parent, {articleId}, context) => {
+          saveArticle: async(parent, {input}, {user}) => {
             //console.log(args.input)
             //if user is session
-             if(context.user){
-                 const updatedUser = await User.findOneAndUpdate(
-                     {_id: context.user._id},
-                    
-                     {$addToSet: { savedArticles: articleId }},
-                     { new: true }
-                 ).populate('savedArticles');
+             if(user){
+                 const updatedUser = await User.findByIdAndUpdate(
+                     {_id: context.user._id},     
+                     {$addToSet: { savedArticles: input } },
+                     { new: true, runValidators: true }
+                 )
+                 //
                  return updatedUser;
              }
              throw new AuthenticationError('You need to be logged in!');

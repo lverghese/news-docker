@@ -8,7 +8,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
 import { SAVE_ARTICLE } from "../utils/mutations";
 import { saveArticleId, getSavedArticleId } from "../utils/localStorage";
-import { searchArticles} from '../utils/API';
+import { searchArticles } from '../utils/API';
 const Home = () => {
 //create state to hold articles from api data
     const [displayArticles, setDisplayArticles] =  useState([]);
