@@ -1,11 +1,11 @@
-export const getSavedArticleId = () => {
+export const getSavedArticleIds = () => {
     const savedArticleIds= localStorage.getItem('saved_articles')
       ? JSON.parse(localStorage.getItem('saved_articles'))
       : [];
     return savedArticleIds;
   };
 
-  export const saveArticleId = (articleIdArr) => {
+  export const saveArticleIds = (articleIdArr) => {
     if (articleIdArr.length) {
       localStorage.setItem('saved_articles', JSON.stringify(articleIdArr));
     } else {
@@ -21,7 +21,8 @@ export const getSavedArticleId = () => {
       return false;
     };
 
-    const updatedSavedArticlesIds = saveArticleId?.filter((savedArticleId) => savedArticleId !== articleId)
+    //extracting articleId for refernce in dashboard
+    const updatedSavedArticlesIds = saveArticleIds?.filter((savedArticleId) => savedArticleId !== articleId)
     localStorage.setItem('saved_article', JSON.stringify(updatedSavedArticlesIds));
     return true;
   };

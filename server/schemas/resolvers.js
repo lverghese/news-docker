@@ -44,13 +44,13 @@ const resolvers = {
             return { token, user };
           },
 
-          saveArticle: async(parent, {input}, {user}) => {
+          saveArticle: async(parent, {savedArticle}, {user}) => {
             //console.log(args.input)
             //if user is session
              if(user){
                  const updatedUser = await User.findByIdAndUpdate(
                      {_id: context.user._id},     
-                     {$addToSet: { savedArticles: input } },
+                     {$addToSet: { savedArticles: savedArticle } },
                      { new: true, runValidators: true }
                  )
                  //

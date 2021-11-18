@@ -16,7 +16,7 @@ type User {
 }
 
 type Article{
-    articleId: String
+    articleId: ID
     author: String
     title: String
     urlToImage: String
@@ -29,8 +29,8 @@ type Auth {
     user: User
 }
 
-input articleInput{
-    articleId: String
+type savedArticle{
+    articleId: ID
     author: String
     title: String
     description: String
@@ -41,7 +41,7 @@ input articleInput{
 type Mutation{
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    saveArticle(input: articleInput): User
+    saveArticle(Article: articleInput!): User
     removeArticle(articleId: String!): User
 } 
 `;

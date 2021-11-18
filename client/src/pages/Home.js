@@ -7,22 +7,22 @@ import Auth from '../utils/Auth';
 import { useMutation } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
 import { SAVE_ARTICLE } from "../utils/mutations";
-import { saveArticleId, getSavedArticleId } from "../utils/localStorage";
+import { saveArticleIds, getSavedArticleIds } from "../utils/localStorage";
 import { searchArticles } from '../utils/API';
 const Home = () => {
 //create state to hold articles from api data
     const [displayArticles, setDisplayArticles] =  useState([]);
     //search initially empty
     const [searchInput, setSearchInput] = useState('');
-    const [savedArticleIds, setSavedArticleIds] = useState(getSavedArticleId());
-    const [saveArticle] = useMutation(SAVE_ARTICLE);
+    const [savedArticleIds, setSavedArticleIds] = useState(getSavedArticleIds());
+    const [saveArticle, { error }] = useMutation(SAVE_ARTICLE);
     // set up useEffect hook to save `savedarticles` 
     //list to localStorage on component unmount too keep pwa functionality
 //possible to set unmount to after 2 weeks of no use?
     //method to display api data 
 
     useEffect(() => {
-        return () => saveArticleId(savedArticleIds);
+        return () => saveArticleIds(savedArticleIds);
     });
 
  //called onclick of save this article btn
@@ -34,19 +34,18 @@ const Home = () => {
     }
 
     try {
-        await saveArticle({
-            variables: {article: articleToSave},
-            /**ref booksearch fot  this cache part */
-            update: cache => {
-              const {me} = cache.readQuery({ query: GET_ME });
-             // cache.writeQuery({data: { me: { ...me, savedBooks: [...me.savedBooks, bookToSave]});
-            }
-        });
-        setSavedArticleIds([ ...savedArticleIds, articleToSave.articleId]);
-    } catch(err){
-        console.log(err);
+       const { data } = await saveArticle({
+           variables: {input: articleToSave}
+       });
+       if(error){
+        throw new Error('something went wrong!');
+       }
+             // if book successfully saves to user's account, save book id to state
+      setSavedArticleIds([...savedArticleIds, articleToSave.articleId]);
+    } catch (err) {
+      console.error(err);
     }
-};
+  };
 
     const handleShowArticles = async (event) => {
         //are we keeping the search option? if so this becomes a search btn handler 
