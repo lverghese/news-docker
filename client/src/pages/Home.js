@@ -35,7 +35,7 @@ const Home = () => {
 
  //called onclick of save this article btn
  const handleSaveArticle= async(articleId) => {
-    const articleToSave = displayArticles.find((article) => article.articleId === articleId);
+    const articleToSave = displayArticles.find((article) => article._id === articleId);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if(!token){
         return false;

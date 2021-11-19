@@ -57,11 +57,6 @@ const resolvers = {
              }
              throw new AuthenticationError('You need to be logged in!');
            },
-           /**           author,
-            title,
-            description,
-            urlToImage,
-            url*/
             removeArticle: async(parent, {_id}, {user}) => {
                  if(user){
                      const updatedUser = await User.findByIdAndUpdate(

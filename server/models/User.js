@@ -20,10 +20,9 @@ const userSchema = new Schema({
     minlength: 5
   },
   
-    //set articleid to be an array of articles
+    //set article _id to be an array of articles
     savedArticles: [articleSchema],
   },
-  // do we need to set virts?
   {
     toJSON: {
       virtuals: true,
@@ -44,7 +43,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when user is queried their exercises based on their articleid comes with it 
+// when user is queried their exercises based on their article _id comes with it 
  userSchema.virtual('articles').get(function () {
    return this.savedArticles.length;
  });
