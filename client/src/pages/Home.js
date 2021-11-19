@@ -6,11 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faSearchengin} from '@fortawesome/free-brands-svg-icons'
 
 // import * as Fa from '@fortawesome/react-fontawesome' 
-import * as FaIcons from 'react-icons/fa';
+//import * as FaIcons from 'react-icons/fa';
 
 import { MDBCol } from "mdbreact";
 import React, { useEffect, useState } from "react";
-import {  Container, Card, CardColumns } from 'react-bootstrap';
+import {  Container, Card, CardColumns, Form, Button, Col } from 'react-bootstrap';
 import Auth from '../utils/Auth';
 import { useMutation } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
@@ -94,19 +94,27 @@ const Home = () => {
 
        return (
           <>
-        <Container fluid>
-            <h1>Seach for an article</h1>
-            
-            <MDBCol md="6">
-      <div className="input-group md-form form-sm form-1 pl-0">
-        <div className="input-group-prepend">
-          <span className="input-group-text lighten-3" id="basic-text1">
-          <FontAwesomeIcon icon={faSearchengin} />
-          </span>
-        </div>
-        <input className="form-control my-0 py-1" type="text" placeholder="Search for articles" aria-label="Search" />
-      </div>
-    </MDBCol>
+        <Container>
+          <h1>Search for Endless Articles!</h1>
+          <Form onSubmit={handleShowArticles}>
+            <Form.Row>
+              <Col xs={12} md={8}>
+                <Form.Control
+                  name='searchInput'
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  type='text'
+                  size='lg'
+                  placeholder='Search for an article'
+                />
+              </Col>
+              <Col xs={12} md={4}>
+                <Button type='submit' variant='dark' size='lg'>
+                  Submit Search
+                </Button>
+              </Col>
+            </Form.Row>
+          </Form>
         </Container>
         <CardColumns>
             {displayArticles.map((article) => {
