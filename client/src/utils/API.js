@@ -1,3 +1,6 @@
+require('dotenv').config()
+
+
 export const getMe = (token) => {
     return fetch('/api/users/me', {
       headers: {
