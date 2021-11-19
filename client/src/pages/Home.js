@@ -2,12 +2,13 @@
 //option to select only if logged in
 // import React from "react";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { FontAwesomeIcon } from '@fontawesome/react-fontawesome';
 // import * as Fa from '@fortawesome/react-fontawesome' 
+import * as FaIcons from 'react-icons/fa';
+
 import { MDBCol } from "mdbreact";
 import React, { useEffect, useState } from "react";
 import {  Container, Card, CardColumns } from 'react-bootstrap';
-
 import Auth from '../utils/Auth';
 import { useMutation } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
