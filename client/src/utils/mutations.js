@@ -17,12 +17,12 @@ mutation addUser($username: String!, $password: String!, $email: String!){
     addUser(username: $username, password: $password, email: $email){
         token
         user {
-            articleId
+            _id
             username
             email
             articleCount
             savedArticles {
-                articleId
+                _id
                 author
                 description
                 title
@@ -37,7 +37,7 @@ mutation addUser($username: String!, $password: String!, $email: String!){
 export const SAVE_ARTICLE = gql`
 mutation saveArticle($input: articleInput!){
     saveArticle(input: $input){
-            articleId
+            _id
             author
             title
             description

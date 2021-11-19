@@ -44,31 +44,24 @@ const resolvers = {
             return { token, user };
           },
 
-          saveArticle: async(parent, {input: {       
-            author,
-            title,
-            description,
-            urlToImage,
-            url
-          }}, {user}) => {
+          saveArticle: async(parent, {input}, {user}) => {
             //console.log(args.input)
             //if user is session
              if(user){
                  const updatedUser = await User.findByIdAndUpdate(
                      {_id: user._id},     
-                     {$addToSet: { savedArticles:  author,
-                      title,
-                      description,
-                      urlToImage,
-                      url } },
+                     {$addToSet: { savedArticles: input} },
                      { new: true, runValidators: true }
                  )
-                 //
                  return updatedUser;
              }
              throw new AuthenticationError('You need to be logged in!');
            },
-           
+           /**           author,
+            title,
+            description,
+            urlToImage,
+            url*/
             removeArticle:async(parent, args, context) => {
                  if(context.user){
                      const updatedUser = await User.findOneAndUpdate(

@@ -16,7 +16,7 @@ type User {
 }
 
 type Article{
-    articleId: ID
+    _id: ID
     author: String
     title: String
     urlToImage: String
@@ -30,7 +30,7 @@ type Auth {
 }
 
 input articleInput{
-    articleId: ID
+    _id: ID
     author: String
     title: String
     description: String
