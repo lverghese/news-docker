@@ -1,14 +1,3 @@
-//dashboard displaying possible workouts to browze  
-//option to select only if logged in
-// import React from "react";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faSearchengin} from '@fortawesome/free-brands-svg-icons'
-
-// import * as Fa from '@fortawesome/react-fontawesome' 
-//import * as FaIcons from 'react-icons/fa';
-
-import { MDBCol } from "mdbreact";
 import React, { useEffect, useState } from "react";
 import {  Container, Card, CardColumns, Form, Button, Col } from 'react-bootstrap';
 import Auth from '../utils/Auth';
@@ -17,6 +6,8 @@ import { GET_ME } from '../utils/queries';
 import { SAVE_ARTICLE } from "../utils/mutations";
 import { saveArticleIds, getSavedArticleIds } from "../utils/localStorage";
 import { searchArticles } from '../utils/API';
+
+
 const Home = () => {
 //create state to hold articles from api data
     const [displayArticles, setDisplayArticles] =  useState([]);
