@@ -62,18 +62,17 @@ const resolvers = {
             description,
             urlToImage,
             url*/
-            removeArticle:async(parent, args, context) => {
-                 if(context.user){
-                     const updatedUser = await User.findOneAndUpdate(
-                         {_id: context.user._id },
-                         {$pull: {savedArticles: { articlesId: args.articleId }}},
-                         {new: true }
+            removeArticle: async(parent, {_id}, {user}) => {
+                 if(user){
+                     const updatedUser = await User.findByIdAndUpdate(
+                         {_id: user._id },
+                         {$pull: {savedArticles: { _id: _id }}},
+                         {new: true, runValidators: true }
                      );
                      return updatedUser;
                  }
                  throw new AuthenticationError('You need to be logged in!');
             }
-
     }
 };
 

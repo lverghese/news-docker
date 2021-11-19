@@ -49,14 +49,14 @@ mutation saveArticle($input: articleInput!){
 `;
 
 export const REMOVE_ARTICLE = gql`
-    mutation removeArticle($articleId: ID){
-        removeArticle(Article: $article){
+    mutation removeArticle($_id: String){
+        removeArticle(_id: $_id){
             _id
             username
             email
             articleCount
             savedArticles{
-                articleId
+                _id
                 author
                 title
                 description
