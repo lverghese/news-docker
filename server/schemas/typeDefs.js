@@ -17,7 +17,7 @@ type User {
 
 type Article{
     _id: ID
-    author: String
+    authors: String
     title: String
     urlToImage: String
     description: String
