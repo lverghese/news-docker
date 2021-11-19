@@ -53,7 +53,7 @@ export const deleteArticle= (articleId, token) => {
   // make a search to news api
   //ie:
 // https://newsapi.org/v2/everything?q=bitcoin
-const KEY = process.env.REACT_APP_GOOGLE_API_KEY;
+const KEY = process.env.REACT_APP_API_KEY;
 
 export const searchArticles= (query) => {
     return fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=${KEY}`);
