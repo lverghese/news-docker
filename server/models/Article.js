@@ -6,10 +6,12 @@ const articleSchema = new Schema({
     type: String,
     required: true,
   },
-  author:
+  authors:
+  [
     {
       type: String,
-    },
+    }
+  ],
   description: {
     type: String,
     required: true,

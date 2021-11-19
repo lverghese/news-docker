@@ -10,7 +10,7 @@ export const GET_ME = gql`
         articleCount
         savedArticles{
             _id
-            author
+            authors
             title
             description
             urlToImage

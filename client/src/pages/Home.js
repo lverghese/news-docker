@@ -80,8 +80,8 @@ const Home = () => {
                 authors: article.authors,
                 title: article.title,
                 description: article.description,
-                link: article.infoLink,
-                image: article.image,
+                link: article.url,
+                image: article.urlToImage
               }))
           
               //if not search, just display a bunch of fetched articles of a certain type?
@@ -121,7 +121,7 @@ const Home = () => {
                 return(
                     <Card key = {article.articleId}>
                         <Card.Title>{article.title}</Card.Title>
-                        <Card.Subtitle className='mb-2 text-muted'> Authors: {article.author}</Card.Subtitle>
+                        <Card.Subtitle className='mb-2 text-muted'> Authors: {article.authors}</Card.Subtitle>
                         <Card.Text>{article.description}</Card.Text>
                         <Card.Link href={article.url}>{article.url}</Card.Link>
                     </Card>
