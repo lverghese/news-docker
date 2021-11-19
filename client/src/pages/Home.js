@@ -2,7 +2,9 @@
 //option to select only if logged in
 // import React from "react";
 
-//import { FontAwesomeIcon } from '@fontawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faSearchengin} from '@fortawesome/free-brands-svg-icons'
+
 // import * as Fa from '@fortawesome/react-fontawesome' 
 import * as FaIcons from 'react-icons/fa';
 
@@ -99,7 +101,7 @@ const Home = () => {
       <div className="input-group md-form form-sm form-1 pl-0">
         <div className="input-group-prepend">
           <span className="input-group-text lighten-3" id="basic-text1">
-          <FontAwesomeIcon icon={['fab', 'searchengin']} />
+          <FontAwesomeIcon icon={faSearchengin} />
           </span>
         </div>
         <input className="form-control my-0 py-1" type="text" placeholder="Search for articles" aria-label="Search" />

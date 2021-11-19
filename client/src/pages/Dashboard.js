@@ -54,8 +54,8 @@ const Dashboard = () => {
           </Jumbotron>
           <Container>
             <h2>
-              {userData.savedArticle.length
-                ? `You have ${userData.savedArticle.length} saved ${userData.savedArticles.length === 1 ? 'articles' : 'articles'}: left to complete!`
+              {userData.savedArticles.length
+                ? `You have ${userData.savedArticles.length} saved ${userData.savedArticles.length === 1 ? 'articles' : 'articles'}: left to complete!`
                 : 'You have no saved articles yet'}
             </h2>
             <CardColumns>
