@@ -45,10 +45,11 @@ const Home = () => {
        const { data } = await saveArticle({
            variables: {input: articleToSave}
        });
+       console.log(data);
        if(error){
         throw new Error('something went wrong!');
        }
-             // if book successfully saves to user's account, save book id to state
+             // if article  saves to useraccount save id to state
       setSavedArticleIds([...savedArticleIds, articleToSave.articleId]);
     } catch (err) {
       console.error(err);
@@ -77,11 +78,11 @@ const Home = () => {
     
             const articleData = articles.map((article) => ({
                 articleId: article._id,
-                authors: article.authors,
+                author: article.author,
                 title: article.title,
                 description: article.description,
-                link: article.url,
-                image: article.urlToImage
+                url: article.url,
+                urlToImage: article.urlToImage
               }))
           
               //if not search, just display a bunch of fetched articles of a certain type?
@@ -121,9 +122,19 @@ const Home = () => {
                 return(
                     <Card key = {article.articleId}>
                         <Card.Title>{article.title}</Card.Title>
-                        <Card.Subtitle className='mb-2 text-muted'> Authors: {article.authors}</Card.Subtitle>
+                        <Card.Subtitle className='mb-2 text-muted'> Author(s): {article.author}</Card.Subtitle>
                         <Card.Text>{article.description}</Card.Text>
                         <Card.Link href={article.url}>{article.url}</Card.Link>
+                        {Auth.loggedIn() && (
+                    <Button
+                      disabled={savedArticleIds?.some((savedArticleId) => savedArticleId === article.articleId)}
+                      className='btn-block btn-info'
+                      onClick={() => handleSaveArticle(article.articleId)}>
+                      {savedArticleIds?.some((savedArticleId) => savedArticleId === article.articleId)
+                        ? 'Article saved to dashboard!'
+                        : 'Save Article!'}
+                    </Button>
+                  )}
                     </Card>
                 );
             })}
