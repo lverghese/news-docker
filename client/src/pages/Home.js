@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {  Container, Card, CardColumns, Form, Button, Col } from 'react-bootstrap';
+import CardBox from '../components/CardBox';
+import {  Container, Form, Button, Col } from 'react-bootstrap';
 import Auth from '../utils/Auth';
 import { useMutation } from '@apollo/react-hooks';
 import { GET_ME } from '../utils/queries';
@@ -25,25 +26,26 @@ const Home = () => {
     });
 
  //called onclick of save this article btn
- const handleSaveArticle= async(articleId) => {
-    const articleToSave = displayArticles.find((article) => article._id === articleId);
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
-    if(!token){
-        return false;
-    }
+ const handleSaveArticle= async(event) => {
+     console.log(event.target)
+    // const articleToSave = displayArticles.find((article) => article._id === articleId);
+    // const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // if(!token){
+    //     return false;
+    // }
 
-    try {
-       const { data } = await saveArticle({
-           variables: {input: articleToSave}
-       });
-       if(error){
-        throw new Error('something went wrong!');
-       }
+    // try {
+    //    const { data } = await saveArticle({
+    //        variables: {input: articleToSave}
+    //    });
+    //    if(error){
+    //     throw new Error('something went wrong!');
+    //    }
              // if book successfully saves to user's account, save book id to state
-      setSavedArticleIds([...savedArticleIds, articleToSave.articleId]);
-    } catch (err) {
-      console.error(err);
-    }
+    //   setSavedArticleIds([...savedArticleIds, articleToSave.articleId]);
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
     const handleShowArticles = async (event) => {
@@ -65,18 +67,20 @@ const Home = () => {
             }
       
             const { articles } = await response.json();
-    
+  
             const articleData = articles.map((article) => ({
-                articleId: article._id,
-                authors: article.authors,
+                articleId: article.publishedAt,
+                author: article.author,
                 title: article.title,
                 description: article.description,
-                link: article.url,
-                image: article.urlToImage
+                url: article.url,
+                urlToImage: article.urlToImage,
+                handleSave: (e) => handleSaveArticle(e)
+
               }))
           
               //if not search, just display a bunch of fetched articles of a certain type?
-              setDisplayArticles(articleData);;
+              setDisplayArticles(articleData)
             setSearchInput('')
           } catch (err) {
             console.error(err);
@@ -86,7 +90,7 @@ const Home = () => {
        return (
           <>
         <Container>
-          <h1>Search for Endless Articles!</h1>
+          <h1 className="text-center">Search for Endless Articles!</h1>
           <Form onSubmit={handleShowArticles}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -107,18 +111,8 @@ const Home = () => {
             </Form.Row>
           </Form>
         </Container>
-        <CardColumns>
-            {displayArticles.map((article) => {
-                return(
-                    <Card key = {article.articleId}>
-                        <Card.Title>{article.title}</Card.Title>
-                        <Card.Subtitle className='mb-2 text-muted'> Authors: {article.authors}</Card.Subtitle>
-                        <Card.Text>{article.description}</Card.Text>
-                        <Card.Link href={article.url}>{article.url}</Card.Link>
-                    </Card>
-                );
-            })}
-        </CardColumns>
+        <CardBox articles={displayArticles} handleSave={handleSaveArticle}/>
+
         </>
       )
 };
