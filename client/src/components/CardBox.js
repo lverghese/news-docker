@@ -16,9 +16,6 @@ const CardBox = (props) => {
                     urlToImage={urlToImage}
                     description={description}
                     handleSave={(e) => handleSave(e)}
-
-
-                    
                     />
                 )
             }
