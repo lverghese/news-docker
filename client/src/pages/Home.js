@@ -77,11 +77,11 @@ const Home = () => {
     
             const articleData = articles.map((article) => ({
                 articleId: article._id,
-                authors: article.authors,
+                author: article.author,
                 title: article.title,
                 description: article.description,
-                link: article.url,
-                image: article.urlToImage
+                url: article.url,
+                urlTomage: article.urlToImage
               }))
           
               //if not search, just display a bunch of fetched articles of a certain type?
@@ -95,7 +95,7 @@ const Home = () => {
        return (
           <>
         <Container>
-          <h1>Search for Endless Articles!</h1>
+          <h1 className="text-center">Search for Endless Articles!</h1>
           <Form onSubmit={handleShowArticles}>
             <Form.Row>
               <Col xs={12} md={8}>
@@ -119,12 +119,17 @@ const Home = () => {
         <CardColumns>
             {displayArticles.map((article) => {
                 return(
+                    <div className="wrapper">
+                        {/* style={{width: '70rem'}} */}
                     <Card key = {article.articleId}>
                         <Card.Title>{article.title}</Card.Title>
-                        <Card.Subtitle className='mb-2 text-muted'> Authors: {article.authors}</Card.Subtitle>
+                        <Card.Subtitle className='mb-2 text-muted'> Authors: {article.author}</Card.Subtitle>
                         <Card.Text>{article.description}</Card.Text>
+                        
+                        <Card.Img src={article.urlToImage} />
                         <Card.Link href={article.url}>{article.url}</Card.Link>
                     </Card>
+                    </div>
                 );
             })}
         </CardColumns>

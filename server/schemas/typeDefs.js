@@ -17,7 +17,7 @@ type User {
 
 type Article{
     _id: ID
-    authors: [String]
+    author: [String]
     title: String
     urlToImage: String
     description: String
@@ -31,7 +31,7 @@ type Auth {
 
 input articleInput{
     _id: ID
-    authors: [String]
+    author: [String]
     title: String
     description: String
     urlToImage: String
