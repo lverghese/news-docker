@@ -16,7 +16,7 @@ type User {
 }
 
 type Article{
-    _id: ID
+    articleId: String
     author: [String]
     title: String
     urlToImage: String
@@ -30,7 +30,7 @@ type Auth {
 }
 
 input articleInput{
-    _id: ID
+    articleId: String!
     author: [String]
     title: String
     description: String
@@ -47,3 +47,4 @@ type Mutation{
 `;
 //  https://egghead.io/lessons/apollo-wrap-graphql-mutation-arguments-with-a-graphql-input-type
 module.exports = typeDefs;
+//   

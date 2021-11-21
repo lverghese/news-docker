@@ -39,8 +39,8 @@ export const saveArticle = (articleData, token) => {
          authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(articleData),
+      //body: JSON.stringify(articleData.articleId)
      });
-    //console.log(articleData);
   };
 
   //remove saved article from user's dashboard
@@ -53,8 +53,8 @@ export const deleteArticle= (articleId, token) => {
     });
   };
 
-  // make a search to news api
-  //ie:
+// make a search to news api
+//ie:
 // https://newsapi.org/v2/everything?q=bitcoin
 const KEY = process.env.REACT_APP_API_KEY;
 

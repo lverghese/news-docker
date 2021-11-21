@@ -35,14 +35,19 @@ const Home = () => {
 
  //called onclick of save this article btn
  const handleSaveArticle= async(articleId) => {
-    const articleToSave = displayArticles.find((article) => article._id === articleId);
+    console.log(articleId);
+    const articleToSave = displayArticles.find((article) => article.articleId === articleId);
+   
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     if(!token){
         return false;
     }
 
     try {
-       const { data } = await saveArticle({
+      console.log(articleToSave);
+      //when i give the articletosave to savearticle() it dumps the articleid to null
+      //wai?
+       const { data } = await saveArticle({ 
            variables: {input: articleToSave}
        });
        console.log(data);
@@ -75,9 +80,9 @@ const Home = () => {
             }
       
             const { articles } = await response.json();
-    
+            console.log(articles);
             const articleData = articles.map((article) => ({
-                articleId: article._id,
+                articleId: article.url,
                 author: article.author,
                 title: article.title,
                 description: article.description,
@@ -86,8 +91,8 @@ const Home = () => {
               }))
           
               //if not search, just display a bunch of fetched articles of a certain type?
-              setDisplayArticles(articleData);;
-            setSearchInput('')
+              setDisplayArticles(articleData);
+              setSearchInput('');
           } catch (err) {
             console.error(err);
           }
