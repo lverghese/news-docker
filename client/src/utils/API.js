@@ -32,15 +32,26 @@ export const getMe = (token) => {
   
   //save article data to user obj
 export const saveArticle = (articleData, token) => {
+
     return fetch('/api/users', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
          authorization: `Bearer ${token}`,
       },
+      //console.log(articleData.articleId);
       body: JSON.stringify(articleData),
       //body: JSON.stringify(articleData.articleId)
-     });
+      
+     })
+     .then(res => res.json())
+     .then(articleData => {
+       console.log(articleData.articleId);
+     })
+     .catch((err) => {
+       console.log(err);
+     })
+     
   };
 
   //remove saved article from user's dashboard

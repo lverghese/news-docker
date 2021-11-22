@@ -4,7 +4,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faSearchengin} from '@fortawesome/free-brands-svg-icons'
-
+import uniqid from 'uniqid';
 // import * as Fa from '@fortawesome/react-fontawesome' 
 //import * as FaIcons from 'react-icons/fa';
 
@@ -17,6 +17,8 @@ import { GET_ME } from '../utils/queries';
 import { SAVE_ARTICLE } from "../utils/mutations";
 import { saveArticleIds, getSavedArticleIds } from "../utils/localStorage";
 import { searchArticles } from '../utils/API';
+import { UniqueDirectiveNamesRule } from 'graphql';
+
 const Home = () => {
 //create state to hold articles from api data
     const [displayArticles, setDisplayArticles] =  useState([]);
@@ -62,8 +64,7 @@ const Home = () => {
   };
 
     const handleShowArticles = async (event) => {
-        //are we keeping the search option? if so this becomes a search btn handler 
-        //could be cool to have articles populate the homepage at random for browsing until user searches for one
+        //HERE we need to initialize the unique ID for each rendered article
         event.preventDefault();
 
 
@@ -82,7 +83,7 @@ const Home = () => {
             const { articles } = await response.json();
             console.log(articles);
             const articleData = articles.map((article) => ({
-                articleId: article.url,
+                articleId: uniqid(),
                 author: article.author,
                 title: article.title,
                 description: article.description,
