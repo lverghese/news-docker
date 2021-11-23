@@ -42,7 +42,6 @@ const Home = () => {
     
     //on page load, set handleShowArticles
     window.onload = function(){
-      
       document.getElementById('form-btn').click();
     };
 
@@ -101,7 +100,8 @@ const Home = () => {
                 title: article.title,
                 description: article.description,
                 url: article.url,
-                urlToImage: article.urlToImage
+                urlToImage: article.urlToImage,
+                content: article.content
               }))
           
               //if not search, just display a bunch of fetched articles of a certain type?

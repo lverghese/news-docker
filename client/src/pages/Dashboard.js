@@ -63,7 +63,7 @@ const Dashboard = () => {
                     <Card.Body>
                         <Card.Title>{article.title}</Card.Title>
                         <Card.Subtitle className='mb-2 text-muted'> Authors: {article.author}</Card.Subtitle>
-                        <Card.Text>{article.description}</Card.Text>
+                        <Card.Text>{article.content}</Card.Text>
                         <Card.Link href={article.url}>{article.url}</Card.Link>
                         <Button className='btn-block btn-danger' onClick={() => handleDeleteArticle(article.articleId)}>
                           Delete this Article!

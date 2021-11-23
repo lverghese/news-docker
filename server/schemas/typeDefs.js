@@ -22,6 +22,7 @@ type Article{
     urlToImage: String
     description: String
     url: String
+    content: String
 }
 
 type Auth {
@@ -36,6 +37,7 @@ input articleInput{
     description: String
     urlToImage: String
     url: String
+    content: String
 }
 
 type Mutation{
