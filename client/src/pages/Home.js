@@ -19,15 +19,19 @@ import { SAVE_ARTICLE } from "../utils/mutations";
 import { saveArticleIds, getSavedArticleIds } from "../utils/localStorage";
 import { searchArticles } from '../utils/API';
 import { UniqueDirectiveNamesRule } from 'graphql';
+import { removeArgumentsFromDocument } from '@apollo/client/utilities';
+var randomWords = require('random-words');
 
 const Home = () => {
 //create state to hold articles from api data
-    const [displayArticles, setDisplayArticles] =  useState([]);
+
     //search initially empty
-    const [searchInput, setSearchInput] = useState('');
+    const [searchInput, setSearchInput] = useState(randomWords());
+    const [displayArticles, setDisplayArticles] =  useState([]);
     const [savedArticleIds, setSavedArticleIds] = useState(getSavedArticleIds());
     const [saveArticle, { error }] = useMutation(SAVE_ARTICLE);
-    // set up useEffect hook to save `savedarticles` 
+    
+    //set up useEffect hook to save `savedarticles` 
     //list to localStorage on component unmount too keep pwa functionality
 //possible to set unmount to after 2 weeks of no use?
     //method to display api data 
@@ -35,6 +39,11 @@ const Home = () => {
     useEffect(() => {
         return () => saveArticleIds(savedArticleIds);
     });
+    
+    //on page load, set handleShowArticles
+    window.onload = function(){
+      document.getElementById('form-btn').click();
+    };
 
  //called onclick of save this article btn
  const handleSaveArticle= async(articleId) => {
@@ -70,6 +79,8 @@ const Home = () => {
 
 
         if (!searchInput) {
+          
+          //setSearchInput(randomWords())
             return false;
           }
       
@@ -89,12 +100,13 @@ const Home = () => {
                 title: article.title,
                 description: article.description,
                 url: article.url,
-                urlToImage: article.urlToImage
+                urlToImage: article.urlToImage,
+                content: article.content
               }))
           
               //if not search, just display a bunch of fetched articles of a certain type?
               setDisplayArticles(articleData);
-              setSearchInput('');
+              //setSearchInput('');
           } catch (err) {
             console.error(err);
           }
@@ -102,8 +114,8 @@ const Home = () => {
 
        return (
           <>
-        <Container>
-          <h1 className="text-center text-dark">Search for Endless Articles!</h1>
+      <Container>
+          <h1 className="text-center text-dark">Finding articles on "{searchInput}" for you!</h1>
           <Form onSubmit={handleShowArticles}>
             <Form.Row>
               <Col xs={12} md={11}>
@@ -114,6 +126,7 @@ const Home = () => {
                   type='text'
                   size='lg'
                   placeholder='Search for an article!'
+                  
                 />
               </Col>
               <Col xs={12} md={1}>

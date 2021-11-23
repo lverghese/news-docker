@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-
 export const getMe = (token) => {
     return fetch('/api/users/me', {
       headers: {
@@ -63,3 +62,4 @@ const KEY = process.env.REACT_APP_API_KEY;
 export const searchArticles= (query) => {
     return fetch(`https://newsapi.org/v2/everything?q=${query}&apiKey=${KEY}`);
 };
+

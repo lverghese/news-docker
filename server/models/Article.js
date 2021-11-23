@@ -26,6 +26,9 @@ const articleSchema = new Schema({
   articleId: {
     type: String,
     required: true
+  },
+  content: {
+    type: String
   }
 });
 

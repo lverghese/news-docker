@@ -48,6 +48,7 @@ mutation saveArticle($input: articleInput!){
             description
             urlToImage
             url
+            content
           }
         }
 }
@@ -67,6 +68,7 @@ export const REMOVE_ARTICLE = gql`
                 description
                 urlToImage
                 url
+                content
             }
         }
     }

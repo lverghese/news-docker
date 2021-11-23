@@ -19,7 +19,7 @@ export const getSavedArticleIds = () => {
     :null;
     if(!savedArticlesIds){
       return false;
-    };
+  };
 
     //extracting articleId for refernce in dashboard
     const updatedSavedArticlesIds = saveArticleIds?.filter((savedArticleId) => savedArticleId !== articleId)

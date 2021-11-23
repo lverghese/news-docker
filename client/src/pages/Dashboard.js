@@ -59,17 +59,17 @@ const Dashboard = () => {
             <CardColumns style={{margin: '25px'}}>
               {userData.savedArticles.map((article) => {
                 return (
-                  <Card key = {article.articleId} className="Card" border="secondary" style={{width: '26rem'}}> 
-                  <Card.Title>{article.title}</Card.Title>
-                  <Card.Subtitle>Written by: {article.author}</Card.Subtitle>
-                  <Card.Text>{article.description}</Card.Text>
-                  <Card.Link href={article.url}><Card.Img src={article.urlToImage}></Card.Img></Card.Link>
-                  <h6 className="wording"> Click the picture to visit the article or Click the button to view or delete the article!</h6>
-                  <Button className="btn-clicked" variant='secondary' href={article.url}>View Article</Button>
-                  <Button className='btn-clicked' variant='secondary' onClick={() => handleDeleteArticle(article.articleId)}>
-                          Delete Article!
-                  </Button>
-                    
+                    <Card key = {article.articleId} style={{ width: '40rem' }}>
+                       {article.urlToImage ? <Card.Img src={article.urlToImage} alt={`The cover for ${article.title}`} variant='top' /> : null}
+                    <Card.Body>
+                        <Card.Title>{article.title}</Card.Title>
+                        <Card.Subtitle className='mb-2 text-muted'> Authors: {article.author}</Card.Subtitle>
+                        <Card.Text>{article.content}</Card.Text>
+                        <Card.Link href={article.url}>{article.url}</Card.Link>
+                        <Button className='btn-block btn-danger' onClick={() => handleDeleteArticle(article.articleId)}>
+                          Delete this Article!
+                        </Button>
+                    </Card.Body>
                 </Card>
                 );
               })}
