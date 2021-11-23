@@ -40,6 +40,7 @@ mutation saveArticle($input: articleInput!){
         _id
         username
         email
+        articleCount
         savedArticles{           
             articleId
             author

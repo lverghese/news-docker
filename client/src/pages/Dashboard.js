@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     //empty set if none saved
     const userData = data?.me || [];
-    console.log(userData);
+        console.log(userData);
       //accepts article index as id 
     const handleDeleteArticle = async (articleId) => {
       const token = Auth.loggedIn() ? Auth.getToken() : null;

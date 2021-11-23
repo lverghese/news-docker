@@ -19,8 +19,6 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  
-    //set article _id to be an array of articles
     savedArticles: [articleSchema],
   },
   {
@@ -44,7 +42,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 // when user is queried their exercises based on their article _id comes with it 
- userSchema.virtual('articles').get(function () {
+ userSchema.virtual('articleCount').get(function () {
    return this.savedArticles.length;
  });
 
