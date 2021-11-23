@@ -47,6 +47,7 @@ const resolvers = {
           saveArticle: async(parent, {input}, {user}) => {
             //if user is session
              if(user){
+               console.log('input', input)
                  const updatedUser = await User.findByIdAndUpdate(
                      {_id: user._id},     
                      {$addToSet: { savedArticles: input } },
