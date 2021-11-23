@@ -150,7 +150,7 @@ const Home = () => {
                       className='btn-click' 
                       onClick={() => handleSaveArticle(article.articleId)}>
                       {savedArticleIds?.some((savedArticleId) => savedArticleId === article.articleId)
-                        ? 'Article saved to dashboard!'
+                        ? 'Saved Article'
                         : 'Save Article!'}
                     </Button>
                   )}
