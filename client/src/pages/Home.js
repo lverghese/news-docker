@@ -26,7 +26,7 @@ const Home = () => {
 //create state to hold articles from api data
 
     //search initially empty
-    const [searchInput, setSearchInput] = useState(randomWords().toUpperCase);
+    const [searchInput, setSearchInput] = useState(randomWords());
     const [displayArticles, setDisplayArticles] =  useState([]);
     const [savedArticleIds, setSavedArticleIds] = useState(getSavedArticleIds());
     const [saveArticle, { error }] = useMutation(SAVE_ARTICLE);
@@ -39,9 +39,10 @@ const Home = () => {
     useEffect(() => {
         return () => saveArticleIds(savedArticleIds);
     });
-
+    
     //on page load, set handleShowArticles
     window.onload = function(){
+      
       document.getElementById('form-btn').click();
     };
 

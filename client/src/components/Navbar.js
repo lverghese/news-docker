@@ -8,10 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Auth from '../utils/Auth';
 
+
+
 const AppNavbar = () => {
     // set modal display state
     const [showModal, setShowModal] = useState(false);
-  
+ 
     return (
       <>
         <Navbar bg='danger' variant='dark' expand='lg'>
@@ -24,7 +26,7 @@ const AppNavbar = () => {
             <Navbar.Toggle aria-controls='navbar' />
             <Navbar.Collapse id='navbar'>
               <Nav className='ml-auto'>
-                <Nav.Link as={Link} to='/'>
+             <Nav.Link as={Link} to='/'>
                   Search For Articles
                 </Nav.Link>
                 {/* if user is logged in show saved books and logout */}

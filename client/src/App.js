@@ -2,12 +2,11 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
-// import Pusher from 'pusher-js';
-// import pushid from 'pushid';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import NoMatch from './pages/NoMatch';
 
 const client = new ApolloClient({
   request: operation => {
@@ -28,8 +27,9 @@ function App() {
       <>
         <Navbar />
         <Switch>
-          <Route exact path='/' component={Home} />
+          <Route exact path='/' component={Home}/>
           <Route exact path='/dashboard' component={Dashboard} />
+          <Route component={NoMatch} />
         </Switch>
       </>
     </Router>
