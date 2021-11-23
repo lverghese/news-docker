@@ -44,8 +44,7 @@ module.exports = {
   },
   // save a article to a user's `savedArticles` field by adding it to the set (to prevent duplicates)
   // user comes from `req.user` created in the auth middleware function
-  async saveArticle({ user, body }, res) {
-    console.log(user);
+  async saveArticle({ user, body}, res) {
     try {
       const updatedUser = await User.findOneAndUpdate(
         { _id: user._id },

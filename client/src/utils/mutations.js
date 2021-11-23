@@ -21,8 +21,8 @@ mutation addUser($username: String!, $password: String!, $email: String!){
             username
             email
             articleCount
-            savedArticles {
-                _id
+            savedArticles {       
+                articleId
                 author
                 description
                 title
@@ -37,26 +37,30 @@ mutation addUser($username: String!, $password: String!, $email: String!){
 export const SAVE_ARTICLE = gql`
 mutation saveArticle($input: articleInput!){
     saveArticle(input: $input){
-            _id
+        _id
+        username
+        email
+        savedArticles{           
+            articleId
             author
             title
             description
             urlToImage
             url
-        
+          }
         }
 }
 `;
 
 export const REMOVE_ARTICLE = gql`
-    mutation removeArticle($_id: String){
-        removeArticle(_id: $_id){
+    mutation removeArticle($ArticleId: Int){
+        removeArticle(ArticleId: $Int){
             _id
             username
             email
             articleCount
             savedArticles{
-                _id
+                articleId
                 author
                 title
                 description

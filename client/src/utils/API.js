@@ -31,16 +31,18 @@ export const getMe = (token) => {
   };
   
   //save article data to user obj
-export const saveArticle = (articleData, token) => {
+export const saveArticle = ({articleData}, token) => {
+
     return fetch('/api/users', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
          authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify(articleData),
-     });
-    //console.log(articleData);
+      //console.log(articleData.articleId);
+      //body: JSON.stringify(articleId, title, description, url, urlToImage),
+      body: JSON.stringify(articleData.articleId)
+     })
   };
 
   //remove saved article from user's dashboard
@@ -53,8 +55,8 @@ export const deleteArticle= (articleId, token) => {
     });
   };
 
-  // make a search to news api
-  //ie:
+// make a search to news api
+//ie:
 // https://newsapi.org/v2/everything?q=bitcoin
 const KEY = process.env.REACT_APP_API_KEY;
 

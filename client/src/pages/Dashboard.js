@@ -3,7 +3,6 @@ import React from 'react';
 import { Container, CardColumns, Card, Button, Jumbotron } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
 //import { getMe, deleteArticle } from '../utils/API';
 import Auth from '../utils/Auth';
 import { removeArticleId } from '../utils/localStorage';
@@ -18,10 +17,8 @@ const Dashboard = () => {
 
     //empty set if none saved
     const userData = data?.me || [];
-
-  
-
-      // create function that accepts the book's mongo _id value as param and deletes the book from the database
+    console.log(userData);
+      //accepts article index as id 
     const handleDeleteArticle = async (articleId) => {
       const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -62,13 +59,13 @@ const Dashboard = () => {
               {userData.savedArticles.map((article) => {
                 return (
                     <Card key = {article.articleId} style={{ width: '40rem' }}>
-                       {article.image ? <Card.Img src={article.image} alt={`The cover for ${article.title}`} variant='top' /> : null}
+                       {article.urlToImage ? <Card.Img src={article.urlToImage} alt={`The cover for ${article.title}`} variant='top' /> : null}
                     <Card.Body>
                         <Card.Title>{article.title}</Card.Title>
                         <Card.Subtitle className='mb-2 text-muted'> Authors: {article.author}</Card.Subtitle>
                         <Card.Text>{article.description}</Card.Text>
                         <Card.Link href={article.url}>{article.url}</Card.Link>
-                        <Button className='btn-block btn-danger' onClick={() => handleDeleteArticle(article._id)}>
+                        <Button className='btn-block btn-danger' onClick={() => handleDeleteArticle(article.articleId)}>
                           Delete this Article!
                         </Button>
                     </Card.Body>

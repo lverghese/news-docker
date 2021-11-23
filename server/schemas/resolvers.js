@@ -43,14 +43,14 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
           },
-
+/**: {articleId, title, author, description, url, urlToImage} */
           saveArticle: async(parent, {input}, {user}) => {
-            //console.log(args.input)
             //if user is session
              if(user){
+               console.log('input', input)
                  const updatedUser = await User.findByIdAndUpdate(
                      {_id: user._id},     
-                     {$addToSet: { savedArticles: input} },
+                     {$addToSet: { savedArticles: input } },
                      { new: true, runValidators: true }
                  )
                  return updatedUser;

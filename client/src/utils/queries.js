@@ -9,7 +9,7 @@ export const GET_ME = gql`
         password
         articleCount
         savedArticles{
-            _id
+            articleId
             author
             title
             description
