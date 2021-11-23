@@ -1,4 +1,3 @@
-//workout  
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab, } from 'react-bootstrap';
@@ -14,11 +13,11 @@ const AppNavbar = () => {
   
     return (
       <>
-        <Navbar bg='danger' variant='dark' expand='lg'>
+        <Navbar bg='dark' variant='dark' expand='lg'>
           <Container fluid>
             <Navbar.Brand as={Link} to='/'>
              
-              Google Articles Search
+              Distilled News Hub
               
             </Navbar.Brand>
             <Navbar.Toggle aria-controls='navbar' />
@@ -30,7 +29,7 @@ const AppNavbar = () => {
                 {/* if user is logged in show saved books and logout */}
                 {Auth.loggedIn() ? (
                   <>
-                    <Nav.Link as={Link} to='/dashboard'>
+                    <Nav.Link as={Link} to='/saved'>
                       See your saved Articles
                     </Nav.Link>
                     <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
@@ -79,4 +78,3 @@ const AppNavbar = () => {
   };
   
   export default AppNavbar;
-

@@ -103,10 +103,10 @@ const Home = () => {
        return (
           <>
         <Container>
-          <h1 className="text-center">Search for Endless Articles!</h1>
+          <h1 className="text-center text-dark">Search for Endless Articles!</h1>
           <Form onSubmit={handleShowArticles}>
             <Form.Row>
-              <Col xs={12} md={8}>
+              <Col xs={12} md={11}>
                 <Form.Control
                   name='searchInput'
                   value={searchInput}
@@ -116,7 +116,7 @@ const Home = () => {
                   placeholder='Search for an article!'
                 />
               </Col>
-              <Col xs={12} md={4}>
+              <Col xs={12} md={1}>
                 <Button type='submit' variant='dark' size='lg'>
                   Search
                 </Button>
@@ -124,14 +124,25 @@ const Home = () => {
             </Form.Row>
           </Form>
         </Container>
-        <CardColumns>
+        <CardColumns style={{margin: '25 px'}}>
             {displayArticles.map((article) => {
                 return(
-                    <Card key = {article.articleId}>
+                  <Card key = {article.articleId} className="Card" border="secondary" style={{width: '26rem'}}> 
                         <Card.Title>{article.title}</Card.Title>
-                        <Card.Subtitle className='mb-2 text-muted'> Author(s): {article.author}</Card.Subtitle>
+                        <Card.Subtitle>Written by: {article.author}</Card.Subtitle>
                         <Card.Text>{article.description}</Card.Text>
-                        <Card.Link href={article.url}>{article.url}</Card.Link>
+                        <Card.Link href={article.url}><Card.Img src={article.urlToImage}></Card.Img></Card.Link>
+            <h6 className="wording"> Click the picture to visit the article or Click the book to save!</h6>
+            <Card.Link >
+           
+            
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-book-half" viewBox="0 0 16 16" >
+                <path d="M8.5 2.687c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+                </svg>
+                
+            </Card.Link>
+            <br></br>
+            <Button className="btn-click" href={article.url}>View Article</Button>
                         {Auth.loggedIn() && (
                     <Button
                       disabled={savedArticleIds?.some((savedArticleId) => savedArticleId === article.articleId)}
