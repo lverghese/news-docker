@@ -46,34 +46,35 @@ const Dashboard = () => {
         <>
           <Jumbotron fluid className='text-light bg-dark'>
             <Container>
-              <h1 class="display-4">Your Saved Articles</h1>
+              <h1 className="text-center">Your Saved Articles</h1>
             </Container>
           </Jumbotron>
           <Container>
-            <h2>
+            <h2 className="text-center">
               {userData.savedArticles.length
-                ? `You have ${userData.savedArticles.length} saved ${userData.savedArticles.length === 1 ? 'articles' : 'articles'}: left to complete!`
+                ? `You have ${userData.savedArticles.length} saved ${userData.savedArticles.length === 1 ? 'articles' : 'articles'}: You can delete each article after reading!`
                 : 'You have no saved articles yet'}
             </h2>
-            <CardColumns>
+            </Container>
+            <CardColumns style={{margin: '25px'}}>
               {userData.savedArticles.map((article) => {
                 return (
-                    <Card key = {article.articleId} style={{ width: '40rem' }}>
-                       {article.urlToImage ? <Card.Img src={article.urlToImage} alt={`The cover for ${article.title}`} variant='top' /> : null}
-                    <Card.Body>
-                        <Card.Title>{article.title}</Card.Title>
-                        <Card.Subtitle className='mb-2 text-muted'> Authors: {article.author}</Card.Subtitle>
-                        <Card.Text>{article.description}</Card.Text>
-                        <Card.Link href={article.url}>{article.url}</Card.Link>
-                        <Button className='btn-block btn-danger' onClick={() => handleDeleteArticle(article.articleId)}>
-                          Delete this Article!
-                        </Button>
-                    </Card.Body>
+                  <Card key = {article.articleId} className="Card" border="secondary" style={{width: '26rem'}}> 
+                  <Card.Title>{article.title}</Card.Title>
+                  <Card.Subtitle>Written by: {article.author}</Card.Subtitle>
+                  <Card.Text>{article.description}</Card.Text>
+                  <Card.Link href={article.url}><Card.Img src={article.urlToImage}></Card.Img></Card.Link>
+                  <h6 className="wording"> Click the picture to visit the article or Click the button to view or delete the article!</h6>
+                  <Button className="btn-clicked" variant='secondary' href={article.url}>View Article</Button>
+                  <Button className='btn-clicked' variant='secondary' onClick={() => handleDeleteArticle(article.articleId)}>
+                          Delete Article!
+                  </Button>
+                    
                 </Card>
                 );
               })}
             </CardColumns>
-          </Container>
+          
         </>
       );
 };

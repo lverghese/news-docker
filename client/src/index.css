@@ -76,3 +76,8 @@ code {
   
 }
 
+.btn-clicked {
+  margin: 43px;
+  display: flex;
+}
+
