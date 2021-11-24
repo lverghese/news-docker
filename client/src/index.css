@@ -1,0 +1,86 @@
+@import 'https://fonts.googleapis.com/css?family=Open+Sans';
+
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	background-color: #00111c;
+	color: rgb(211, 211, 211);
+  background-image: url("https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&h=1000&w=1800");
+  
+}
+
+img {
+	max-width: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 16rem));
+}
+
+.Card{
+  color:rgb(211, 211, 211);
+}
+
+.card-columns .card {
+  background-color: #002945;
+}
+
+.card-header {
+  font-weight: bold;
+  margin: auto;
+  width: auto;
+  font-size: large;
+}
+
+.card-title {
+  margin: 18px;
+  font-weight: bold;
+}
+
+.card-subtitle {
+  margin: 12px;
+}
+
+.card-text {
+  margin: 12px;
+}
+
+.card-link h6, svg {
+  margin: 15px;
+}
+
+.wording {
+  margin: 5px;
+
+}
+
+.btn-click {
+  margin: 45px;
+  display: flex;
+  
+}
+
+.btn-clicked {
+  margin: 43px;
+  display: flex;
+}
+
+.headwrap {
+  font-family:  "Times New Roman", Times, serif;
+}
