@@ -1,5 +1,5 @@
 
-import Card from 'react-bootstrap/Card'
+
 import React from 'react';
 
 const navFooter = () => <footer className="page-footer font-small blue pt-4">
