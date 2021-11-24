@@ -2,19 +2,24 @@ const { AuthenticationError } = require('apollo-server-express');
 const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
-const resolvers  ={
+const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if (context.user) {
               const userData = await User.findOne({ _id: context.user._id })
                 .select('-__v -password')
-                .populate('books')
+                .populate('savedArticles')
       
               return userData;
             }
       
             throw new AuthenticationError('Not logged in');
           },
+          users: async () => {
+            return User.find()
+              .select('-__v -password')
+              .populate('savedArticles');
+          }
     },
     Mutation: {
         addUser: async (parents, args ) => {
@@ -38,8 +43,31 @@ const resolvers  ={
             const token = signToken(user);
             return { token, user };
           },
-//edit plan? => mark workouts as complete/customize them further?
-
+/**: {articleId, title, author, description, url, urlToImage} */
+          saveArticle: async(parent, {input}, {user}) => {
+            //if user is session
+             if(user){
+               console.log('input', input)
+                 const updatedUser = await User.findByIdAndUpdate(
+                     {_id: user._id},     
+                     {$addToSet: { savedArticles: input } },
+                     { new: true, runValidators: true }
+                 )
+                 return updatedUser;
+             }
+             throw new AuthenticationError('You need to be logged in!');
+           },
+            removeArticle: async(parent, args, {user}) => {
+                 if(user){
+                     const updatedUser = await User.findByIdAndUpdate(
+                         {_id: user._id },
+                         {$pull: {savedArticles: { articleId: args.articleId }}},
+                         {new: true, runValidators: true }
+                     );
+                     return updatedUser;
+                 }
+                 throw new AuthenticationError('You need to be logged in!');
+            }
     }
 };
 

@@ -3,6 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+<<<<<<< HEAD
+=======
+  "scripts": {
+    "start": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+>>>>>>> develop
   "dependencies": {
     "apollo-server-express": "^2.15.0",
     "bcrypt": "^5.0.1",
@@ -14,6 +24,7 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.3"
+<<<<<<< HEAD
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -22,4 +33,7 @@
   },
   "author": "",
   "license": "ISC"
+=======
+  }
+>>>>>>> develop
 }
