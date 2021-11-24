@@ -17,7 +17,7 @@ const AppNavbar = () => {
     return (
       <>
         <Navbar bg='dark' variant='dark' expand='lg'>
-          <Container fluid>
+          <Container fluid className= "headwrap">
             <Navbar.Brand as={Link} to='/'>
             <img width="300px" height="auto" className="img-responsive" src={Logo}  alt="logo" />
               
