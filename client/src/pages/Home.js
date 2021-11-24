@@ -114,7 +114,7 @@ const Home = () => {
 
        return (
           <>
-      <Container>
+      <Container className="headwrap">
           <h1 className="text-center text-dark">Finding articles on "{searchInput}" for you!</h1>
           <Form onSubmit={handleShowArticles}>
             <Form.Row>
