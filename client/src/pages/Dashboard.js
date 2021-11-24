@@ -59,7 +59,7 @@ const Dashboard = () => {
             <CardColumns style={{margin: '25px'}}>
               {userData.savedArticles.map((article) => {
                 return (
-                  <Card key = {article.articleId} className="Card" border="secondary" style={{width: '26rem'}}> 
+                  <Card key = {article.articleId} className="Card" border="secondary" > 
                   <Card.Title>{article.title}</Card.Title>
                   <Card.Subtitle>Written by: {article.author}</Card.Subtitle>
                   <Card.Text>{article.content}</Card.Text>

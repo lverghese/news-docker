@@ -140,7 +140,7 @@ const Home = () => {
         <CardColumns style={{margin: '25px'}}>
             {displayArticles.map((article) => {
                 return(
-                  <Card key = {article.articleId} className="Card" border="secondary" style={{width: '26rem'}}> 
+                  <Card key = {article.articleId} className="Card" border="secondary"> 
                         <Card.Title>{article.title}</Card.Title>
                         <Card.Subtitle>Written by: {article.author}</Card.Subtitle>
                         <Card.Text>{article.description}</Card.Text>
