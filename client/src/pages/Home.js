@@ -1,25 +1,11 @@
-//dashboard displaying possible workouts to browze  
-//option to select only if logged in
-// import React from "react";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faSearchengin} from '@fortawesome/free-brands-svg-icons'
 import uniqid from 'uniqid';
-// import * as Fa from '@fortawesome/react-fontawesome' 
-//import * as FaIcons from 'react-icons/fa';
-
 import {  Container, Card, CardColumns, Form, Button, Col } from 'react-bootstrap';
-import { MDBCol } from "mdbreact";
 import React, { useEffect, useState } from "react";
-import CardBox from '../components/CardBox';
 import Auth from '../utils/Auth';
 import { useMutation } from '@apollo/react-hooks';
-import { GET_ME } from '../utils/queries';
 import { SAVE_ARTICLE } from "../utils/mutations";
 import { saveArticleIds, getSavedArticleIds } from "../utils/localStorage";
 import { searchArticles } from '../utils/API';
-import { UniqueDirectiveNamesRule } from 'graphql';
-import { removeArgumentsFromDocument } from '@apollo/client/utilities';
 var randomWords = require('random-words');
 
 const Home = () => {
