@@ -4,6 +4,7 @@ import { Navbar, Nav, Container, Modal, Tab, } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Logo from '../assets/DHB.PNG';
 
 import Auth from '../utils/Auth';
 
@@ -18,8 +19,8 @@ const AppNavbar = () => {
         <Navbar bg='dark' variant='dark' expand='lg'>
           <Container fluid>
             <Navbar.Brand as={Link} to='/'>
-             
-              Distilled News Hub
+            <img width="300px" height="auto" className="img-responsive" src={Logo}  alt="logo" />
+              
               
             </Navbar.Brand>
             <Navbar.Toggle aria-controls='navbar' />
