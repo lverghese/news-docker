@@ -40,7 +40,7 @@ const LoginForm = () => {
         <>
         
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='secondary'>
           Something went wrong with your login credentials!
         </Alert>
         <Form.Group>
@@ -71,7 +71,7 @@ const LoginForm = () => {
         <Button
           disabled={!(userFormData.email && userFormData.password)}
           type='submit'
-          variant='success'>
+          variant='secondary'>
           Submit
         </Button>
       </Form>
