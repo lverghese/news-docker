@@ -41,7 +41,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
 };
 
-// when user is queried their exercises based on their article _id comes with it 
+// when user is queried their articles based on their article _id comes with it 
  userSchema.virtual('articleCount').get(function () {
    return this.savedArticles.length;
  });
